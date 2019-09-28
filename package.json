@@ -1,0 +1,38 @@
+{
+  "name": "gsp_bot",
+  "version": "initial-0.0.1",
+  "description": "Gamer Source Pub",
+  "main": "index.js",
+  "scripts": {
+    "babel": "babel-node",
+    "flow": "flow",
+    "standard": "standard"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "plugins": [
+      "flowtype"
+    ],
+    "ignore": [
+      "./node_modules/*.*"
+    ]
+  },
+  "maintener": [
+    {
+      "name": "Ikramullah",
+      "github": "skymunn",
+      "discord": "Stellarz_Luna#4554"
+    }
+  ],
+  "license": "AGPL-3.0-or-later",
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/node": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/preset-flow": "^7.0.0",
+    "babel-eslint": "^10.0.3",
+    "eslint-plugin-flowtype": "^4.3.0",
+    "flow-bin": "^0.108.0",
+    "standard": "^14.3.1"
+  }
+}
