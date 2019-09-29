@@ -1,21 +1,12 @@
 {
   "name": "gsp_bot",
-  "version": "initial-0.0.1",
+  "version": "0.0.1-initial",
   "description": "Gamer Source Pub",
   "main": "index.js",
   "scripts": {
-    "babel": "babel-node",
-    "flow": "flow",
-    "standard": "standard"
-  },
-  "standard": {
-    "parser": "babel-eslint",
-    "plugins": [
-      "flowtype"
-    ],
-    "ignore": [
-      "./node_modules/*.*"
-    ]
+    "standard": "standard",
+    "dev": "nodemon --exec \"npm start dev\"",
+    "start": "node index"
   },
   "maintener": [
     {
@@ -24,15 +15,19 @@
       "discord": "Stellarz_Luna#4554"
     }
   ],
+  "_moduleAliases": {
+    "@components": "./Components/",
+    "@scripts": "./Scripts/"
+  },
   "license": "AGPL-3.0-or-later",
   "devDependencies": {
-    "@babel/core": "^7.6.2",
-    "@babel/node": "^7.6.2",
-    "@babel/preset-env": "^7.6.2",
-    "@babel/preset-flow": "^7.0.0",
-    "babel-eslint": "^10.0.3",
-    "eslint-plugin-flowtype": "^4.3.0",
-    "flow-bin": "^0.108.0",
+    "chalk": "^2.4.2",
+    "nodemon": "^1.19.2",
     "standard": "^14.3.1"
+  },
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "dotenv": "^8.1.0",
+    "module-alias": "^2.2.1"
   }
 }

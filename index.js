@@ -1,11 +1,18 @@
-var a: number = 1
-a += 2 + 3
-console.log(a)
+require('module-alias/register')
+require('dotenv').config()
+const Discord = require('@components/DiscordClient')
+const fs = require('fs')
 
-var b: string = 'ganteng'
-b = 'munn ' + b
-console.log(b)
+const Client = new Discord.Client({
+  // Reserved for config
+})
 
-var c: boolean = true
-c = false
-console.log(c)
+// Require Commando in Routes
+fs.readdir('./Routes/', (err, files) => {
+  if (err) throw err
+  files.forEach(file => {
+    require(`./Routes/${file}`)(Client)
+  })
+})
+
+Client.login(process.env.BOT_TOKEN)
