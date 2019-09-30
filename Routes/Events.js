@@ -1,14 +1,6 @@
-const Router = require('@scripts/EventRouter')
-
 module.exports = (client) => {
-  Router(client, [
-    {
-      filename: 'Ready',
-      events: 'ready'
-    },
-    {
-      filename: 'PingTest',
-      events: 'message'
-    }
-  ])
+  const Router = new (require('@scripts/EventRouter'))(client)
+
+  Router.load('ready', 'Ready')
+  Router.load('message', 'PingTest')
 }

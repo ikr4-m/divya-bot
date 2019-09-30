@@ -1,20 +1,26 @@
 const { Client } = require('@components/DiscordClient') // eslint-disable-line
 
 /**
- * Events yang akan diluncurkan
- * @typedef {Object} TypeDefEvents
- * @property {string} filename Filename Events yang akan dipanggil
- * @property {string} events Tipe events yang akan digunakan
+ * Event Router untuk bot ini.
  */
+module.exports = class Router {
+  /**
+   * @param {Client} client
+   */
+  constructor (client) {
+    this.client = client
+  }
 
-/**
- * Inisiator events untuk bot ini.
- * @param {Client} client Client Discord
- * @param {TypeDefEvents[]} events Events yang ingin diluncurkan
- */
-module.exports = function Router (client, events) {
-  events.forEach(event => {
-    const file = require('../App/Events/' + event.filename)
-    client.on(event.events, (...args) => file(client, ...args))
-  })
+  /**
+   * Memanggil Events dari folder App/Events
+   * @param {string} events Events yang akan dipanggil, referensi:
+   * https://discord.js.org/#/docs/main/stable/class/Client
+   *
+   * @param {string} filename Nama file yang akan dipanggil, ibarat Closure
+   * apabila anda pernah menggunakan MVC Framework Adonis/Laravel/CI.
+   */
+  load (events, filename) {
+    const file = require('../App/Events/' + filename)
+    this.client.on(events, (...args) => file(this.client, ...args))
+  }
 }
