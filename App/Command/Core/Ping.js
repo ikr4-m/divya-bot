@@ -3,9 +3,8 @@ const { Client, Message } = require('@components/DiscordClient') // eslint-disab
 /**
  * @param {Client} client
  * @param {Message} message
+ * @param {string[]} args
  */
-module.exports = (client, message) => {
-  if (message.content === 'Ping') {
-    message.channel.send('Pong!')
-  }
+module.exports = (client, message, args) => {
+  message.channel.send('pong')
 }
