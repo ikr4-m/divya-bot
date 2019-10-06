@@ -17,6 +17,7 @@ class Client extends Discord.Client {
      * @property {string} color Warna default embed dari bot ini
      * @property {string[]} maintener Maintener untuk bot ini
      * @property {string[]} beta_test Beta Tester untuk bot ini
+     * @property {string[]} game_presence Game presence untuk bot ini.
      */
     this.config = Config
     /**

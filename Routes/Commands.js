@@ -15,8 +15,7 @@ module.exports = (client) => {
   Router.group('Core').then(Router => {
     Router.load('Ping', {
       command: ['ping', 'pong'],
-      description: 'Pong!',
-      usage: '{prefix}ping'
+      description: 'Pong!'
     })
   })
 }
