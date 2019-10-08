@@ -28,5 +28,5 @@ module.exports = (client, message, args) => {
     .setTimestamp()
 
   // Kirim deh
-  message.channel.send(`<@!${member.id}>`, { embed: embed })
+  message.channel.send(`<@!${message.author.id}>`, { embed: embed })
 }
