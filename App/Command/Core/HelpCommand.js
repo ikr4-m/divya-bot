@@ -48,9 +48,8 @@ module.exports = (client, message, args) => {
 
       embed.addField(cate, `\`${newCate.join('` | `')}\``)
     })
-  }
-  // Apabila ada argsnya
-  else {
+  } else {
+    // Apabila ada argsnya
     const commands = client.commands.get(args[0])
     const cmd = typeof commands.command === 'string'
       ? commands.command
