@@ -18,6 +18,9 @@ module.exports = (client) => {
     // Fix prefix override
     if (!message.content.startsWith(prefix)) return undefined
 
+    // Apabila tidak ada commandnya
+    if (!commandFile) return undefined
+
     // Tidak bisa digunakan di DM (Update selanjutnya bakal bisa)
     if (message.channel.type !== 'text') return undefined
 

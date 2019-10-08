@@ -22,9 +22,9 @@ module.exports = (client, message, args) => {
       '',
       member.user.displayAvatarURL
     )
-    .setDescription(`${member.user.username}#${member.user.discriminator} avatar.`)
+    .setDescription(`${member.user.tag} avatar.`)
     .setImage(member.user.displayAvatarURL)
-    .setFooter(`Diminta oleh ${message.author.username}`, message.author.displayAvatarURL)
+    .setFooter(`Diminta oleh ${message.author.tag}`, message.author.displayAvatarURL)
     .setTimestamp()
 
   // Kirim deh

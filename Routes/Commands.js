@@ -24,5 +24,16 @@ module.exports = (client) => {
         { optional: ['userID', 'userMention'] }
       ]
     })
+    Router.load('UserInfo', {
+      command: 'userinfo',
+      description: 'Informasi tentang member yang dituju/akun sendiri',
+      usage: [
+        { optional: ['userID', 'userMention'] }
+      ]
+    })
+    Router.load('AboutBot', {
+      command: ['aboutbot', 'about'],
+      description: 'Tentang bot ini'
+    })
   })
 }
