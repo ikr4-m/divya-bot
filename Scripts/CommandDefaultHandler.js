@@ -66,7 +66,7 @@ module.exports = (client) => {
         user: `${member.username}#${member.discriminator}`,
         command: cmd
       }))
-      commandFile.run(client, message, args)
+      commandFile.run(client, message, args.slice(1))
     } catch (error) {
       console.log(error)
     }

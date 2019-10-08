@@ -17,5 +17,12 @@ module.exports = (client) => {
       command: ['ping', 'pong'],
       description: 'Pong!'
     })
+    Router.load('AvatarUser', {
+      command: ['avatar', 'ava'],
+      description: 'Cek avatar temanmu di sini.',
+      usage: [
+        { optional: ['userID', 'userMention'] }
+      ]
+    })
   })
 }
