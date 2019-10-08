@@ -28,9 +28,11 @@ class Client extends Discord.Client {
      * Isi dari seluruh command dari bot ini
      * @type {Discord.Collection<string, CommandList>}
      * @typedef CommandList
-     * @property {string | string[]} command Dipanggil apa command tersebut dalam chat
-     * @property {string} description Deskripsi dari command tersebut
-     * @property {string} usage Cara penggunaan dari command tersebut
+     * @property {string | string[]} command Dipanggil apa command tersebut dalam chat.
+     * @property {string} denial Denial command dalam sistem.
+     * @property {string} description Deskripsi dari command tersebut/
+     * @property {string} [usage] Cara penggunaan dari command tersebut.
+     * @property {boolean} [moderating] Beri nilai true apabila command tersebut adalah moderation/
      * @property {number} [cooldown] Cooldown dari command anda, defaultnya adalah 5.
      * @property {any} run Jalankan perintahnya
      */

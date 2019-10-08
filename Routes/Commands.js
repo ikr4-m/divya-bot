@@ -13,6 +13,13 @@ module.exports = (client) => {
    */
 
   Router.group('Core').then(Router => {
+    Router.load('HelpCommand', {
+      command: ['help', '?'],
+      description: 'Bingung make bot ini? Di sini tempatnya!',
+      usage: [
+        { optional: ['command'] }
+      ]
+    })
     Router.load('Ping', {
       command: ['ping', 'pong'],
       description: 'Pong!'
@@ -33,7 +40,7 @@ module.exports = (client) => {
     })
     Router.load('AboutBot', {
       command: ['aboutbot', 'about'],
-      description: 'Tentang bot ini'
+      description: 'Tentang bot dan server ini'
     })
   })
 }

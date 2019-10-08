@@ -56,7 +56,10 @@ module.exports = class Router {
       ? fileSplit[0]
       : fileSplit.join('::')
 
-    if (!this.client.helps.has(cateName)) this.client.helps.set(cateName, [])
+    if (!this.client.helps.has(cateName)) {
+      this.client.helps.set(cateName, [])
+      this.client.helps.get(cateName).push(cateName)
+    }
     this.client.helps.get(cateName).push(cmd)
     this.client.console.info(`Loaded command [${file.split('/').join('::')}]`)
 
