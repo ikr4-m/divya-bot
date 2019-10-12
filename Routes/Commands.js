@@ -12,6 +12,30 @@ module.exports = (client) => {
    * baca di README bagian **Waktunya Berurusan dengan Command**.
    */
 
+  /**
+   * Maintener Group
+   * Tolong, untuk pada pengembang,
+   * **jangan mengubah apapun command di bagian ini**.
+   */
+  Router.group('Maintener').then(Router => {
+    Router.load('EvaluationCode', {
+      command: ['eval', 'run'],
+      description: 'Jalankan perintah nyeleneh dari bot ini.',
+      moderating: true,
+      usage: [
+        { require: ['blockCode'] }
+      ]
+    })
+  })
+
+  /**
+   * Core Group
+   * Segala hal yang berkaitan dengan Discord dan Bot
+   * tanpa ada perantara.
+   *
+   * Disarankan untuk tidak mengubah apapun selain ijin dari
+   * maintener bot.
+   */
   Router.group('Core').then(Router => {
     Router.load('HelpCommand', {
       command: ['help', '?'],
@@ -41,6 +65,22 @@ module.exports = (client) => {
     Router.load('AboutBot', {
       command: ['aboutbot', 'about'],
       description: 'Tentang bot dan server ini'
+    })
+  })
+
+  /**
+   * Moderating Bot
+   * Kang pukul punya kekuasaan di sini.
+   */
+  Router.group('Moderation').then(Router => {
+    Router.load('FunnyBanned', {
+      command: 'fban',
+      description: 'Banned, tapi boong.',
+      moderating: true,
+      usage: [
+        { require: ['userID', 'userMention'] },
+        { optional: ['reason'] }
+      ]
     })
   })
 }

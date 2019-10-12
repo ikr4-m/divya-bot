@@ -18,7 +18,7 @@ module.exports = class Router {
    * Panggil file command.
    * @param {string} file Nama file yang akan dipanggil, ibarat Closure
    * apabila anda pernah menggunakan MVC Framework Adonis/Laravel/CI.
-   * @param {CommandFileConfiguration} config Konfigurasi untuk command file ini
+   * @param {import('../Components/DiscordClient').CommandList} config Konfigurasi untuk command file ini
    */
   load (file, config) {
     file = typeof this.lastGroup === 'undefined'
@@ -41,7 +41,9 @@ module.exports = class Router {
       description: config.description,
       usage: typeof config.usage === 'undefined' ? `{prefix}${cmd}` : cmdUsage(config.usage, cmd),
       run: require('../App/Command/' + file),
-      denial: file.split('/').join('::')
+      denial: file.split('/').join('::'),
+      moderating: typeof config.moderating === 'boolean' ? true : false, // eslint-disable-line
+      cooldown: typeof config.cooldown === 'undefined' ? 5 : config.cooldown
     }
     if (typeof config.cooldown !== 'undefined') {
       insertation.cooldown = config.cooldown
@@ -85,17 +87,6 @@ module.exports = class Router {
     })
   }
 }
-
-/**
-  * Konfigurasi yang perlu dikonfigurasi untuk command yang ingin dipanggil.
-  * @typedef {Object} CommandFileConfiguration
-  * @property {string | string[]} command Dipanggil apa command tersebut dalam chat.
-  * @property {string} denial Denial command dalam sistem.
-  * @property {string} description Deskripsi dari command tersebut/
-  * @property {UsageConstructor[]} [usage] Cara penggunaan dari command tersebut.
-  * @property {boolean} [moderating] Beri nilai true apabila command tersebut adalah moderation/
-  * @property {number} [cooldown] Cooldown dari command anda, defaultnya adalah 5.
-  */
 
 /**
   * Callback untuk load

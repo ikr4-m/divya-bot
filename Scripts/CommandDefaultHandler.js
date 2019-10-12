@@ -49,7 +49,7 @@ module.exports = (client) => {
     const member = message.author
     const now = Date.now()
     const timestamps = cooldown.get(namaCommand)
-    const cooldownCount = commandFile.cooldown || 5
+    const cooldownCount = commandFile.cooldown
     const cooldownAmount = (cooldownCount || 5) * 1000
 
     if (!timestamps.has(member.id)) {
@@ -65,6 +65,14 @@ module.exports = (client) => {
 
     // Mencoba untuk eksekusi command
     try {
+      // Apabila yang eksekusi cuma member biasa sedangkan commandnya hanya untuk mod
+      if (!message.guild.members.get(member.id).hasPermission('VIEW_AUDIT_LOG')) {
+        if (commandFile.moderating === true) {
+          message.reply('Sayangnya, perintah tersebut hanya untuk **orang yang berwenang**.')
+          return undefined
+        }
+      }
+
       client.console.info(stringFormat('{user} execute {command}!', {
         user: `${member.username}#${member.discriminator}`,
         command: cmd

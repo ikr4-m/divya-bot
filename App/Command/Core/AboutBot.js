@@ -31,25 +31,23 @@ const MemUsage = () => {
  * @param {string[]} args
  */
 module.exports = (client, message, args) => {
-  const guild = client.guilds.get('302655971946135554')
+  const guild = client.guilds.get(message.guild.id)
 
   // Penanggung jawab Bot
   const embedMaintenerBot = new RichEmbed()
     .setColor(client.config.color)
     .setThumbnail(client.user.displayAvatarURL)
-    .setAuthor('Gamer Source Pub, dan bot ini.', guild.iconURL)
+    .setAuthor(`[${guild.nameAcronym}] ${guild.name}, dan bot ini.`, guild.iconURL)
 
     .addField(
       'Maintener',
-      client.config.maintener.map(m => `<@!${m}>`).join(' | ')
+      client.config.maintener.map(m => `<@!${m}>`).join(' | '),
+      true
     )
     .addField(
       'Beta Tester',
-      client.config.beta_test.map(m => `<@!${m}>`).join(' | ')
-    )
-    .addField(
-      'Bot Repository',
-      '[skymunn://gsp-bot](https://github.com/skymunn/gsp-bot)'
+      client.config.beta_test.map(m => `<@!${m}>`).join(' | '),
+      true
     )
     .addField(
       'Perintah yang tersedia',
@@ -60,6 +58,10 @@ module.exports = (client, message, args) => {
       'Memori yang digunakan',
       MemUsage(),
       true
+    )
+    .addField(
+      'Bot Repository',
+      '[@github-skymunn://gsp-bot](https://github.com/skymunn/gsp-bot)'
     )
 
   // Informasi server

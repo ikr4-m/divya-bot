@@ -38,7 +38,7 @@ module.exports = (client, message, args) => {
       // direktori Developing
       let cate = category[0]
       const newCate = category.slice(1)
-      if (typeof cate.match(/Developing/gm) === 'undefined') return undefined
+      if (cate.includes('Maintener')) return undefined
 
       // Apabila Categorynya adalah subcategory
       if (cate.split('::').length > 1) {
@@ -51,12 +51,13 @@ module.exports = (client, message, args) => {
   } else {
     // Apabila ada argsnya
     const commands = client.commands.get(args[0])
+    console.log(commands)
     const cmd = typeof commands.command === 'string'
       ? commands.command
       : commands.command[0]
     let desc = commands.description
     if (commands.moderating === true) {
-      desc += '\n\n**Perintah ini mutlak hanya dapat dieksekusi oleh Moderator ke atas**.'
+      desc += '\n**PERINGATAN KERAS: Perintah ini mutlak hanya dapat dieksekusi oleh Moderator ke atas**.'
     }
     embed
       .setAuthor(`[${commands.denial}] ${client.config.bot_prefix}${cmd}`)
@@ -67,9 +68,6 @@ module.exports = (client, message, args) => {
       .addField('Cara penggunaan', strFormat(commands.usage, { prefix: client.config.bot_prefix }))
   }
 
-  message.channel.send(`<@!${message.author.id}>. ` +
-    'Catatan sedikit, tanda argumen yang diberikan oleh bot rata-rata otomatis berbahasa Inggris karena ditakutkan ' +
-    'akan ada "cacat transalasi" apabila menggunakan bahasa Indonesia. Jangan ragu untuk menanyakan perintah tersebut ' +
-    'kepada orang yang telah mengerti menggunakan bot ini atau pada Moderator.', { embed: embed }
+  message.channel.send(`<@!${message.author.id}>`, { embed: embed }
   )
 }
