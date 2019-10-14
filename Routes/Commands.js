@@ -73,6 +73,33 @@ module.exports = (client) => {
    * Kang pukul punya kekuasaan di sini.
    */
   Router.group('Moderation').then(Router => {
+    Router.load('Kick', {
+      command: 'kick',
+      description: 'Tendang orang dari server ini.',
+      moderating: true,
+      usage: [
+        { require: ['userID', 'userMention'] },
+        { optional: ['reason'] }
+      ]
+    })
+    Router.load('Ban', {
+      command: 'ban',
+      description: 'Banned orang dari server ini.',
+      moderating: true,
+      usage: [
+        { require: ['userID', 'userMention'] },
+        { optional: ['reason'] }
+      ]
+    })
+    Router.load('Warn', {
+      command: 'warn',
+      description: 'Beri peringatan pada orang di server ini.',
+      moderating: true,
+      usage: [
+        { require: ['userID', 'userMention'] },
+        { optional: ['reason'] }
+      ]
+    })
     Router.load('FunnyBanned', {
       command: 'fban',
       description: 'Banned, tapi boong.',

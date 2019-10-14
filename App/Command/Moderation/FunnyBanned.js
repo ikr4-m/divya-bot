@@ -1,4 +1,3 @@
-/* eslint-disable no-eval */
 const { Client, Message } = require('@components/DiscordClient') // eslint-disable-line
 
 /**
@@ -9,6 +8,11 @@ const { Client, Message } = require('@components/DiscordClient') // eslint-disab
 module.exports = async (client, message, args) => {
   const memberBan = message.mentions.members.first() || message.guild.members.get(args[0])
   const reason = args.slice(1).join(' ')
+
+  if (!memberBan) {
+    message.reply(client.usage('Moderation::Kick'))
+    return undefined
+  }
 
   let messageReplay = `${memberBan.user.tag} telah dibanned`
   // Apabila ada alasan, tambahin alasannya

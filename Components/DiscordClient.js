@@ -1,6 +1,7 @@
 const Discord = require('discord.js')
 const Config = require('../config.json')
 const Console = require('./Console')
+const strFormat = require('string-format')
 
 class Client extends Discord.Client {
   /**
@@ -39,6 +40,16 @@ class Client extends Discord.Client {
      * @type {Discord.Collection<string, string[]>}
      */
     this.helps = new Discord.Collection()
+    /**
+     * Penggunaan dari sebuah command
+     * @param {string} denial Denial dari command tersebut.
+     */
+    this.usage = function (denial) {
+      const usage = this.commands.filter(c => c.denial === denial).first().usage
+      return strFormat(`cara penggunaan yang benar adalah:\`\`\`${usage}\`\`\``, {
+        prefix: this.config.bot_prefix
+      })
+    }
   }
 }
 
@@ -56,8 +67,15 @@ module.exports = { Client, Message }
  * @property {string | string[]} command Dipanggil apa command tersebut dalam chat.
  * @property {string} denial Denial command dalam sistem.
  * @property {string} description Deskripsi dari command tersebut/
- * @property {string} [usage] Cara penggunaan dari command tersebut.
+ * @property {string | UsageConstructor[]} [usage] Cara penggunaan dari command tersebut.
  * @property {boolean} [moderating] Beri nilai true apabila command tersebut adalah moderation/
  * @property {number} [cooldown] Cooldown dari command anda, defaultnya adalah 5.
  * @property {any} run Jalankan perintahnya
+ */
+
+/**
+ * Callback untuk usage
+ * @typedef UsageConstructor
+ * @property {string[]} [optional] Opsional
+ * @property {string[]} [require] Yang diperlukan
  */

@@ -95,10 +95,3 @@ module.exports = class Router {
   * @param {CommandFileConfiguration} config Konfigurasi untuk command file ini
   * @return {void}
   */
-
-/**
- * Callback untuk usage
- * @typedef UsageConstructor
- * @property {string[]} [optional] Opsional
- * @property {string[]} [require] Yang diperlukan
- */

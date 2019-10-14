@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "standard": "standard",
-    "dev": "nodemon --exec \"npm start dev\"",
+    "dev": "nodemon --exec \"npm run standard && npm start dev\"",
     "start": "node index"
   },
   "maintener": [
@@ -23,6 +23,7 @@
   "devDependencies": {
     "chalk": "^2.4.2",
     "moment": "^2.24.0",
+    "mongoose": "^5.7.4",
     "nodemon": "^1.19.2",
     "standard": "^14.3.1",
     "string-format": "^2.0.0"
