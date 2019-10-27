@@ -6,7 +6,8 @@
     "baseUrl": "./",
     "paths": {
       "@components/*": ["./Components/*"],
-      "@scripts/*": ["./Scripts/*"]
+      "@scripts/*": ["./Scripts/*"],
+      "@schema/*": ["./Components/Database/Schema/*"]
     }
   }
 }

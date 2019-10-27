@@ -2,6 +2,8 @@ const Discord = require('discord.js')
 const Config = require('../config.json')
 const Console = require('./Console')
 const strFormat = require('string-format')
+const MongoAdapter = require('./Database/Scripts/Adapter')
+const MongoController = require('./Database/Scripts/Controller')
 
 class Client extends Discord.Client {
   /**
@@ -50,6 +52,19 @@ class Client extends Discord.Client {
         prefix: this.config.bot_prefix
       })
     }
+    this._conDB = new MongoAdapter(process.env.MONGODB_URL, {}).connect()
+    /**
+     * Database ke server
+     */
+    this.database = (model) => {
+      const controller = new (MongoController(model))()
+      return controller
+    }
+    /**
+     * Daftar mute
+     * @type {Discord.Collection<string, WarnList>}
+     */
+    this.mute = new Discord.Collection()
   }
 }
 
@@ -78,4 +93,11 @@ module.exports = { Client, Message }
  * @typedef UsageConstructor
  * @property {string[]} [optional] Opsional
  * @property {string[]} [require] Yang diperlukan
+ */
+
+/**
+ * Isi data untuk warn
+ * @typedef WarnList
+ * @property {string} reason Alasan kenapa mesti dimute
+ * @property {string} timestamp Kapan kena mute?
  */

@@ -51,7 +51,7 @@ module.exports = (client, message, args) => {
   } else {
     // Apabila ada argsnya
     const commands = client.commands.get(args[0])
-    console.log(commands)
+    // console.log(commands)
     const cmd = typeof commands.command === 'string'
       ? commands.command
       : commands.command[0]

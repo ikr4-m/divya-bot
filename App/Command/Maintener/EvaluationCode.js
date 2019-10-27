@@ -7,7 +7,7 @@ const util = require('util')
  * @param {Message} message
  * @param {string[]} args
  */
-module.exports = (client, message, args) => {
+module.exports = async (client, message, args) => {
   // Only maintener can do it
   if (!client.config.maintener.includes(message.author.id)) return undefined
 
@@ -26,6 +26,7 @@ module.exports = (client, message, args) => {
     // Try the code
     try {
       let __eval__ = eval(newScript)
+      console.log(__eval__)
 
       if (typeof __eval__ !== 'string') {
         __eval__ = util.inspect(__eval__, { depth: 0 })

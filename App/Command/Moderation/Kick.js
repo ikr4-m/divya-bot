@@ -24,7 +24,7 @@ module.exports = async (client, message, args) => {
       `Anda telah ditendang dari server **${message.guild.name}** oleh <@!${message.author.id}> dengan alasan:\n\`\`\`${reason}\`\`\``
     ).then(msg => {
       memberKick.kick(auditReason)
-      message.reply(
+      message.channel.send(
       `${memberKick.user.tag} telah ditendang dari server ini dengan alasan:\n\`\`\`${reason}\`\`\``
       )
     })

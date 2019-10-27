@@ -24,7 +24,7 @@ module.exports = async (client, message, args) => {
       `Anda telah dibanned dari server **${message.guild.name}** oleh <@!${message.author.id}> dengan alasan:\n\`\`\`${reason}\`\`\``
     ).then(msg => {
       memberBan.ban(auditReason)
-      message.reply(
+      message.channel.send(
       `${memberBan.user.tag} telah dibanned dari server ini dengan alasan:\n\`\`\`${reason}\`\`\``
       )
     })

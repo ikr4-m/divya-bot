@@ -1,0 +1,68 @@
+const { Client, Message } = require('@components/DiscordClient') // eslint-disable-line
+const Moment = require('moment')
+
+/**
+ * @param {Client} client
+ * @param {Message} message
+ * @param {string[]} args
+ */
+module.exports = async (client, message, args) => {
+  const guild = message.guild
+  const times = args[0].split('.')
+  const member = message.mentions.members.first() || guild.members.get(args[1])
+  const mTimes = Moment()
+
+  if (!member) {
+    message.reply(client.usage('Moderation::Mute'))
+    return undefined
+  }
+
+  // Eksekusi timesnya
+  const timeInString = []
+  times.forEach(t => {
+    // Apabila jam
+    if (t.endsWith('h')) {
+      mTimes.add({ hour: parseInt(t.replace('h', '')) })
+      timeInString.push(`${t.replace('h', '')} jam`)
+    }
+    // Apabila menit
+    if (t.endsWith('m')) {
+      mTimes.add({ minute: parseInt(t.replace('m', '')) })
+      timeInString.push(`${t.replace('m', '')} menit`)
+    }
+    // Apabila detik
+    if (t.endsWith('s')) {
+      mTimes.add({ second: parseInt(t.replace('s', '')) })
+      timeInString.push(`${t.replace('s', '')} detik`)
+    }
+  })
+
+  // Reason dari member
+  const _reason = args.slice(2).join(' ')
+  const reason = _reason.length > 0 ? _reason : 'Tidak ada alasan'
+
+  // Cari role
+  const role = guild.roles.find(r => r.name === 'Muted')
+  if (!role) {
+    message.reply('buat role yang bernama **Muted** terlebih dahulu sebelum menggunakan perintah ini.')
+    return undefined
+  }
+  if (member.roles.has(role.id)) {
+    message.reply('member ini sebelumnya telah dibungkam.')
+    return undefined
+  }
+
+  member.setRoles([role])
+    .then(msg => {
+      client.mute.set(`${guild.id}|${member.id}`, {
+        reason: reason,
+        timestamp: mTimes.format('YYYY-MM-DD HH:mm:ss')
+      })
+      message.channel.send(`<@!${member.id}> berhasil dibungkam dengan alasan:\`\`\`${reason} | ${timeInString.join(', ')}\`\`\``)
+    })
+    .catch(err => {
+      client.console.error(err.message)
+      message.reply('mustahil rasanya untuk membungkam dia. Mungkin karena rolenya yang lebih tinggi dariku.')
+      return undefined
+    })
+}

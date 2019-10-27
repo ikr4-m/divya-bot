@@ -100,6 +100,32 @@ module.exports = (client) => {
         { optional: ['reason'] }
       ]
     })
+    Router.load('InfractionList', {
+      command: ['warnlist', 'infraction'],
+      description: 'Apa-apa saja pelanggaranmu/orang lain di server ini.',
+      moderating: true,
+      usage: [
+        { optional: ['userID', 'userMention'] }
+      ]
+    })
+    Router.load('InfractionClear', {
+      command: 'warnclear',
+      description: 'Hapus semua pelanggaran yang lalu.',
+      moderating: true,
+      usage: [
+        { optional: ['userID', 'userMention'] }
+      ]
+    })
+    Router.load('Mute', {
+      command: 'mute',
+      description: 'Bungkam member di server ini.',
+      moderating: true,
+      usage: [
+        { require: ['"[xh].[xm].[xs]"'] },
+        { require: ['userID', 'userMention'] },
+        { optional: ['reason'] }
+      ]
+    })
     Router.load('FunnyBanned', {
       command: 'fban',
       description: 'Banned, tapi boong.',

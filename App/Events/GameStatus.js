@@ -4,7 +4,7 @@ const { Client } = require('@components/DiscordClient') // eslint-disable-line
  * @param {Client} client
  */
 module.exports = (client) => {
-  const gameStatus = (value) => `${client.config.bot_prefix} | ${value}`
+  const gameStatus = (value) => `${client.config.bot_prefix}help | ${value}`
 
   if (process.env.DEV !== 'true') {
     client.config.game_presence.forEach(game => {

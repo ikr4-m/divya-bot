@@ -14,4 +14,5 @@ module.exports = (client) => {
 
   Router.load('ready', 'Ready')
   Router.load('ready', 'GameStatus')
+  Router.load('ready', 'Moderation/WarnRundown')
 }
