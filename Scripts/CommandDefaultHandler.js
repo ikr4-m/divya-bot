@@ -14,6 +14,7 @@ module.exports = (client) => {
     const args = message.content.slice(prefix.length).trim().split(/ +/g)
     const cmd = args[0].toLowerCase()
     const commandFile = client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd))
+    const member = message.author
 
     // Fix prefix override
     if (!message.content.startsWith(prefix)) return undefined
@@ -23,6 +24,14 @@ module.exports = (client) => {
 
     // Tidak bisa digunakan di DM (Update selanjutnya bakal bisa)
     if (message.channel.type !== 'text') return undefined
+
+    // Apabila yang eksekusi cuma member biasa sedangkan commandnya hanya untuk mod
+    if (!message.guild.members.get(member.id).hasPermission('VIEW_AUDIT_LOG')) {
+      if (commandFile.moderating === true) {
+        message.reply('Sayangnya, perintah tersebut hanya untuk **orang yang berwenang**.')
+        return undefined
+      }
+    }
 
     // If development
     if (process.env.DEV === 'true') {
@@ -46,7 +55,6 @@ module.exports = (client) => {
     }
 
     // Register member
-    const member = message.author
     const now = Date.now()
     const timestamps = cooldown.get(namaCommand)
     const cooldownCount = commandFile.cooldown
@@ -65,14 +73,6 @@ module.exports = (client) => {
 
     // Mencoba untuk eksekusi command
     try {
-      // Apabila yang eksekusi cuma member biasa sedangkan commandnya hanya untuk mod
-      if (!message.guild.members.get(member.id).hasPermission('VIEW_AUDIT_LOG')) {
-        if (commandFile.moderating === true) {
-          message.reply('Sayangnya, perintah tersebut hanya untuk **orang yang berwenang**.')
-          return undefined
-        }
-      }
-
       client.console.info(stringFormat('{user} execute {command}!', {
         user: `${member.username}#${member.discriminator}`,
         command: cmd

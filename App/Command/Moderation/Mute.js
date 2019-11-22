@@ -12,7 +12,7 @@ module.exports = async (client, message, args) => {
   const member = message.mentions.members.first() || guild.members.get(args[1])
   const mTimes = Moment()
 
-  if (!member) {
+  if (!member || !args[0] || !args[1]) {
     message.reply(client.usage('Moderation::Mute'))
     return undefined
   }
@@ -53,12 +53,16 @@ module.exports = async (client, message, args) => {
   }
 
   member.setRoles([role])
-    .then(msg => {
+    .then(async msg => {
       client.mute.set(`${guild.id}|${member.id}`, {
         reason: reason,
-        timestamp: mTimes.format('YYYY-MM-DD HH:mm:ss')
+        timestamp: mTimes.format('YYYY-MM-DD HH:mm:ss'),
+        guildID: guild.id,
+        memberID: member.id
       })
-      message.channel.send(`<@!${member.id}> berhasil dibungkam dengan alasan:\`\`\`${reason} | ${timeInString.join(', ')}\`\`\``)
+      message.channel.send(
+        `<@!${member.id}> berhasil dibungkam dengan alasan:\`\`\`[EXP:${mTimes.format('YYYYMMDDHHmmss')}] ${reason} | ${timeInString.join(', ')}\`\`\``
+      )
     })
     .catch(err => {
       client.console.error(err.message)

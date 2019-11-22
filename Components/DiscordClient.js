@@ -100,4 +100,6 @@ module.exports = { Client, Message }
  * @typedef WarnList
  * @property {string} reason Alasan kenapa mesti dimute
  * @property {string} timestamp Kapan kena mute?
+ * @property {string} guildID
+ * @property {string} memberID
  */
