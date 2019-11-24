@@ -8,6 +8,8 @@ const Moment = require('moment')
  * @param {string[]} args
  */
 module.exports = async (client, message, args) => {
+  const guild = message.guild
+  const now = Moment()
   const ReasonCode = `WR!${Moment().format('YYYYMMDDHHmmss')}`
   const memberWarn = message.mentions.members.first() || message.guild.members.get(args[0])
   if (!memberWarn) {
@@ -19,6 +21,13 @@ module.exports = async (client, message, args) => {
   const _reason = args.slice(1).join(' ')
   const reason = _reason.length > 0 ? _reason : 'Tidak ada alasan'
   const auditReason = `${ReasonCode}:${reason} | ${message.author.tag}`
+
+  // Cari role
+  const role = guild.roles.find(r => r.name === 'Muted')
+  if (!role) {
+    message.reply('buat role yang bernama **Muted** terlebih dahulu sebelum menggunakan perintah ini.')
+    return undefined
+  }
 
   // Masukkan data warning di database.
   const database = client.database(SWarnList)
@@ -53,9 +62,19 @@ module.exports = async (client, message, args) => {
 
   // Apabila dia adalah member biasa, eksekusi
   if (!memberWarn.hasPermission('VIEW_AUDIT_LOG')) {
+    console.log('Masuk')
     switch (warnCount) {
       case 2:
-        // mute 6 jam
+        memberWarn.setRoles([role])
+        client.mute.set(`${guild.id}|${memberWarn.id}`, {
+          reason: reason,
+          timestamp: now.add(6, 'hours').format('YYYY-MM-DD HH:mm:ss'),
+          guildID: guild.id,
+          memberID: memberWarn.id
+        })
+        message.channel.send(
+          `Terhitung 2 kali peringatan, waktunya membungkam ${memberWarn.user.tag} dalam waktu 6 jam`
+        )
         break
       case 3:
         // kick
@@ -67,7 +86,16 @@ module.exports = async (client, message, args) => {
         }
         break
       case 4:
-        // mute sehari
+        memberWarn.setRoles([role])
+        client.mute.set(`${guild.id}|${memberWarn.id}`, {
+          reason: reason,
+          timestamp: now.add(1, 'day').format('YYYY-MM-DD HH:mm:ss'),
+          guildID: guild.id,
+          memberID: memberWarn.id
+        })
+        message.channel.send(
+          `Terhitung 4 kali peringatan, waktunya membungkam ${memberWarn.user.tag} dalam waktu 1 hari`
+        )
         break
       case 5:
         // ban, bisa banding
