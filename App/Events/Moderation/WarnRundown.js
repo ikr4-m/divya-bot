@@ -11,7 +11,7 @@ module.exports = (client) => {
       const target = moment(m.timestamp, 'YYYY-MM-DD HH:mm:ss')
       const diff = now.diff(target)
 
-      if (diff > 0) {
+      if (diff > 0 && typeof m.forever === 'undefined') {
         client.mute.delete(`${m.guildID}|${m.memberID}`)
         const guild = client.guilds.get(m.guildID)
         const memTarget = guild.members.get(m.memberID)

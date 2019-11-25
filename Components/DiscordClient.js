@@ -102,4 +102,5 @@ module.exports = { Client, Message }
  * @property {string} timestamp Kapan kena mute?
  * @property {string} guildID
  * @property {string} memberID
+ * @property {string} [forever]
  */

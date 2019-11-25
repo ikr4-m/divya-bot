@@ -8,7 +8,7 @@ const Moment = require('moment')
  */
 module.exports = async (client, message, args) => {
   const guild = message.guild
-  const times = args[0].split('.')
+  const times = args[1].split('.')
   const member = message.mentions.members.first() || guild.members.get(args[1])
   const mTimes = Moment()
 
@@ -38,7 +38,7 @@ module.exports = async (client, message, args) => {
   })
 
   // Reason dari member
-  const _reason = args.slice(2).join(' ')
+  const _reason = timeInString.length === 0 ? args.slice(1).join(' ') : args.slice(2).join(' ')
   const reason = _reason.length > 0 ? _reason : 'Tidak ada alasan'
 
   // Cari role
@@ -52,14 +52,23 @@ module.exports = async (client, message, args) => {
     return undefined
   }
 
+  // TimeInString apabila panjangnya 0
+  let forever = false
+  if (timeInString.length === 0) {
+    forever = true
+    timeInString.push('DM Staff yang bersangkutan untuk lebih lanjut.')
+  }
+
   member.setRoles([role])
     .then(async msg => {
-      client.mute.set(`${guild.id}|${member.id}`, {
+      const muteSender = {
         reason: reason,
         timestamp: mTimes.format('YYYY-MM-DD HH:mm:ss'),
         guildID: guild.id,
         memberID: member.id
-      })
+      }
+      if (forever) muteSender.forever = true
+      client.mute.set(`${guild.id}|${member.id}`, muteSender)
       message.channel.send(
         `<@!${member.id}> berhasil dibungkam dengan alasan:\`\`\`[EXP:${mTimes.format('YYYYMMDDHHmmss')}] ${reason} | ${timeInString.join(', ')}\`\`\``
       )

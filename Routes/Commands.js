@@ -124,8 +124,8 @@ module.exports = (client) => {
         'membungkam orang tersebut.',
       moderating: true,
       usage: [
-        { require: ['"[xh].[xm].[xs]"'] },
         { require: ['userID', 'userMention'] },
+        { optional: ['"[xh].[xm].[xs]"'] },
         { optional: ['reason'] }
       ]
     })
