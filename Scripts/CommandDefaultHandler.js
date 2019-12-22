@@ -26,7 +26,7 @@ module.exports = (client) => {
     if (message.channel.type !== 'text') return undefined
 
     // Apabila yang eksekusi cuma member biasa sedangkan commandnya hanya untuk mod
-    if (!message.guild.members.get(member.id).hasPermission('VIEW_AUDIT_LOG')) {
+    if (!message.guild.members.get(member.id).hasPermission('MANAGE_ROLES')) {
       if (commandFile.moderating === true) {
         message.reply('Sayangnya, perintah tersebut hanya untuk **orang yang berwenang**.')
         return undefined

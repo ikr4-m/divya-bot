@@ -18,6 +18,9 @@ if (process.argv[2]) {
   Client.console.info('In develop mode.')
 }
 
+// Ping
+require('@scripts/ExpressPing')(Client)
+
 // Require Commando in Routes
 fs.readdir('./Routes/', (err, files) => {
   if (err) throw err
