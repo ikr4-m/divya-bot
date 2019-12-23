@@ -7,9 +7,12 @@ module.exports = (client) => {
   const gameStatus = (value) => `${client.config.bot_prefix}help | ${value}`
 
   if (process.env.DEV !== 'true') {
-    client.config.game_presence.forEach(game => {
-      client.user.setPresence({ game: { name: gameStatus(game) } })
-    })
+    setInterval(() => {
+      const rand = Math.floor(Math.random() * client.config.game_presence.length)
+      client.user.setPresence(
+        { game: { name: gameStatus(client.config.game_presence[rand]) } }
+      )
+    }, 5000)
   } else {
     client.user.setPresence({ game: { name: gameStatus('DEBUG MODE') } })
   }

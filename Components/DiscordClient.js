@@ -65,6 +65,11 @@ class Client extends Discord.Client {
      * @type {Discord.Collection<string, WarnList>}
      */
     this.mute = new Discord.Collection()
+    /**
+     * Timestamp saat bot ini jalan
+     * @type {Date}
+     */
+    this.uptimeDate = new Date()
   }
 }
 

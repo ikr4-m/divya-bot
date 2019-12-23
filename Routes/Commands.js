@@ -66,6 +66,10 @@ module.exports = (client) => {
       command: ['aboutbot', 'about'],
       description: 'Tentang bot dan server ini'
     })
+    Router.load('Uptime', {
+      command: 'uptime',
+      description: 'Sudah berapa lama bot ini begadang?'
+    })
   })
 
   /**
