@@ -8,9 +8,9 @@ const Moment = require('moment')
  */
 module.exports = (client, message, args) => {
   const now = Moment()
-  const hour = now.diff(client.uptimeDate, 'hour')
-  const minute = now.diff(client.uptimeDate, 'minute')
-  const second = now.diff(client.uptimeDate, 'second')
+  const hour = now.diff(client.uptimeDate, 'hour') % 24
+  const minute = now.diff(client.uptimeDate, 'minute') % 60
+  const second = now.diff(client.uptimeDate, 'second') % 60
   const day = now.diff(client.uptimeDate, 'day')
 
   message.reply(
