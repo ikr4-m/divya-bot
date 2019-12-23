@@ -11,8 +11,9 @@ module.exports = (client, message, args) => {
   const hour = now.diff(client.uptimeDate, 'hour')
   const minute = now.diff(client.uptimeDate, 'minute')
   const second = now.diff(client.uptimeDate, 'second')
+  const day = now.diff(client.uptimeDate, 'day')
 
   message.reply(
-    `bot ini telah aktif selama **${hour} jam, ${minute} menit, dan ${second} detik**. [${Moment(client.uptimeDate).format()}]`
+    `bot ini telah aktif selama **${day} hari, ${hour} jam, ${minute} menit, dan ${second} detik**. [${Moment(client.uptimeDate).format()}]`
   )
 }
