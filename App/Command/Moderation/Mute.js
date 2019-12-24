@@ -74,7 +74,7 @@ module.exports = async (client, message, args) => {
       if (forever) muteSender.forever = true
       db.set(`${guild.id}|${member.id}`, muteSender).write()
       message.channel.send(
-        `<@!${member.id}> berhasil dibungkam dengan alasan:\`\`\`[EXP:${mTimes.format('YYYYMMDDHHmmss')}] ${reason} | ${timeInString.join(', ')}\`\`\``
+        `<@!${member.id}> berhasil dibungkam dengan alasan:\n\`\`\`[EXP:${mTimes.format('YYYYMMDDHHmmss')}] ${reason} | ${timeInString.join(', ')}\`\`\``
       )
     })
     .catch(err => {

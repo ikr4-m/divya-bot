@@ -1,6 +1,10 @@
 const { Client, Message } = require('@components/DiscordClient') // eslint-disable-line
 const SWarnList = require('@schema/WarnList')
 const Moment = require('moment')
+const low = require('lowdb')
+const FileSync = require('lowdb/adapters/FileSync')
+const adapter = new FileSync('./Components/Database/mute.json')
+const db = low(adapter)
 
 /**
  * @param {Client} client
@@ -66,12 +70,12 @@ module.exports = async (client, message, args) => {
     switch (warnCount) {
       case 2:
         memberWarn.setRoles([role])
-        client.mute.set(`${guild.id}|${memberWarn.id}`, {
+        db.set(`${guild.id}|${memberWarn.id}`, {
           reason: reason,
           timestamp: now.add(6, 'hours').format('YYYY-MM-DD HH:mm:ss'),
           guildID: guild.id,
           memberID: memberWarn.id
-        })
+        }).write()
         message.channel.send(
           `Terhitung 2 kali peringatan, waktunya membungkam ${memberWarn.user.tag} dalam waktu 6 jam`
         )
@@ -87,12 +91,12 @@ module.exports = async (client, message, args) => {
         break
       case 4:
         memberWarn.setRoles([role])
-        client.mute.set(`${guild.id}|${memberWarn.id}`, {
+        db.set(`${guild.id}|${memberWarn.id}`, {
           reason: reason,
           timestamp: now.add(1, 'day').format('YYYY-MM-DD HH:mm:ss'),
           guildID: guild.id,
           memberID: memberWarn.id
-        })
+        }).write()
         message.channel.send(
           `Terhitung 4 kali peringatan, waktunya membungkam ${memberWarn.user.tag} dalam waktu 1 hari`
         )

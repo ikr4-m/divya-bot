@@ -1,15 +1,15 @@
 const { Client } = require('@components/DiscordClient') // eslint-disable-line
 const moment = require('moment')
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
-const adapter = new FileSync('./Components/Database/mute.json')
-const db = low(adapter)
 
 /**
  * @param {Client} client
  */
 module.exports = (client) => {
   setInterval(() => {
+    const low = require('lowdb')
+    const FileSync = require('lowdb/adapters/FileSync')
+    const adapter = new FileSync('./Components/Database/mute.json')
+    const db = low(adapter)
     const now = moment()
     const val = db.value()
     const keys = Object.keys(val)
