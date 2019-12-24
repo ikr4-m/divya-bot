@@ -1,4 +1,8 @@
 const { Client, Message } = require('@components/DiscordClient') // eslint-disable-line
+const low = require('lowdb')
+const FileSync = require('lowdb/adapters/FileSync')
+const adapter = new FileSync('./Components/Database/mute.json')
+const db = low(adapter)
 
 /**
  * @param {Client} client
@@ -18,11 +22,11 @@ module.exports = async (client, message, args) => {
 
   // Paksa hapus
   if (args[0] !== '--force') {
-    if (!client.mute.has(key)) {
+    if (!db.has(key)) {
       message.reply('member tidak pernah dimute sebelumnya atau server sudah restart. Silahkan diperiksa terlebih dahulu.')
       return undefined
     } else {
-      client.mute.delete(key)
+      db.unset(key).write()
     }
   }
 

@@ -1,5 +1,9 @@
 const { Client, Message } = require('@components/DiscordClient') // eslint-disable-line
 const Moment = require('moment')
+const low = require('lowdb')
+const FileSync = require('lowdb/adapters/FileSync')
+const adapter = new FileSync('./Components/Database/mute.json')
+const db = low(adapter)
 
 /**
  * @param {Client} client
@@ -9,7 +13,7 @@ const Moment = require('moment')
 module.exports = async (client, message, args) => {
   const guild = message.guild
   const times = args[1].split('.')
-  const member = message.mentions.members.first() || guild.members.get(args[1])
+  const member = message.mentions.members.first() || guild.members.get(args[0])
   const mTimes = Moment()
 
   if (!member || !args[0] || !args[1]) {
@@ -68,7 +72,7 @@ module.exports = async (client, message, args) => {
         memberID: member.id
       }
       if (forever) muteSender.forever = true
-      client.mute.set(`${guild.id}|${member.id}`, muteSender)
+      db.set(`${guild.id}|${member.id}`, muteSender).write()
       message.channel.send(
         `<@!${member.id}> berhasil dibungkam dengan alasan:\`\`\`[EXP:${mTimes.format('YYYYMMDDHHmmss')}] ${reason} | ${timeInString.join(', ')}\`\`\``
       )

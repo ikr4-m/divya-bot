@@ -1,5 +1,9 @@
 const { Client } = require('@components/DiscordClient') // eslint-disable-line
 const moment = require('moment')
+const low = require('lowdb')
+const FileSync = require('lowdb/adapters/FileSync')
+const adapter = new FileSync('./Components/Database/mute.json')
+const db = low(adapter)
 
 /**
  * @param {Client} client
@@ -7,12 +11,15 @@ const moment = require('moment')
 module.exports = (client) => {
   setInterval(() => {
     const now = moment()
-    client.mute.forEach(m => {
+    const val = db.value()
+    const keys = Object.keys(val)
+    keys.forEach(_m => {
+      const m = val[_m]
       const target = moment(m.timestamp, 'YYYY-MM-DD HH:mm:ss')
       const diff = now.diff(target)
 
       if (diff > 0 && typeof m.forever === 'undefined') {
-        client.mute.delete(`${m.guildID}|${m.memberID}`)
+        db.unset(`${m.guildID}|${m.memberID}`).write()
         const guild = client.guilds.get(m.guildID)
         const memTarget = guild.members.get(m.memberID)
         const role = guild.roles.find(r => r.name === 'Muted')
