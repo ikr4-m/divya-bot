@@ -33,6 +33,23 @@ module.exports = (client) => {
       }
     }
 
+    // Tangkis lack permission
+    if (commandFile.permission.length > 0) {
+      const lackPerms = []
+      const permsLength = commandFile.permission.length
+      let countPerms = 1
+      commandFile.permission.forEach(perms => {
+        if (!message.guild.members.get(member.id).hasPermission(perms)) {
+          const dan = countPerms !== 1 && countPerms === permsLength ? 'dan ' : ''
+          lackPerms.push(dan + perms.toLowerCase().split('_').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' '))
+        }
+        countPerms++
+      })
+      if (lackPerms.length > 0) {
+        return message.reply(`anda tidak memiliki hak **${lackPerms.join(', ')}** untuk menggunakan command ini.`)
+      }
+    }
+
     // If development
     if (process.env.DEV === 'true') {
       if (message.content.startsWith(prefix) && !client.config.maintener.includes(message.author.id)) {

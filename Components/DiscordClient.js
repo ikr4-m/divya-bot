@@ -89,6 +89,7 @@ module.exports = { Client, Message }
  * @property {string} description Deskripsi dari command tersebut/
  * @property {string | UsageConstructor[]} [usage] Cara penggunaan dari command tersebut.
  * @property {boolean} [moderating] Beri nilai true apabila command tersebut adalah moderation/
+ * @property {import('discord.js').PermissionResolvable[]} [permission] Permission apa aja yang bisa dipakai oleh command ini
  * @property {number} [cooldown] Cooldown dari command anda, defaultnya adalah 5.
  * @property {any} run Jalankan perintahnya
  */

@@ -43,7 +43,8 @@ module.exports = class Router {
       run: require('../App/Command/' + file),
       denial: file.split('/').join('::'),
       moderating: typeof config.moderating === 'boolean' ? true : false, // eslint-disable-line
-      cooldown: typeof config.cooldown === 'undefined' ? 5 : config.cooldown
+      cooldown: typeof config.cooldown === 'undefined' ? 5 : config.cooldown,
+      permission: config.permission || []
     }
     if (typeof config.cooldown !== 'undefined') {
       insertation.cooldown = config.cooldown

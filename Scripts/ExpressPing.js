@@ -13,7 +13,7 @@ module.exports = (client) => {
   })
 
   // Interval to remove .git in glitch
-  if (process.env.DEV === 'true') {
+  if (process.env.DEV !== 'true') {
     setInterval(() => {
       client.console.info('Removing .git folder to save spaces.')
       const { exec } = require('child_process')

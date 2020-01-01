@@ -84,7 +84,8 @@ module.exports = (client) => {
       usage: [
         { require: ['userID', 'userMention'] },
         { optional: ['reason'] }
-      ]
+      ],
+      permission: ['KICK_MEMBERS']
     })
     Router.load('Ban', {
       command: 'ban',
@@ -93,7 +94,8 @@ module.exports = (client) => {
       usage: [
         { require: ['userID', 'userMention'] },
         { optional: ['reason'] }
-      ]
+      ],
+      permission: ['BAN_MEMBERS']
     })
     Router.load('Warn', {
       command: 'warn',
@@ -149,6 +151,16 @@ module.exports = (client) => {
       usage: [
         { require: ['userID', 'userMention'] },
         { optional: ['reason'] }
+      ]
+    })
+    Router.load('RoleModifier', {
+      command: 'role',
+      description: 'Modifikasi role.',
+      moderating: true,
+      usage: [
+        { require: ['userID', 'userMention'] },
+        { require: ['remove', 'add'] },
+        { require: ['roleName/roleID', '...role'] }
       ]
     })
   })
