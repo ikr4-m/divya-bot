@@ -149,7 +149,6 @@ module.exports = (client) => {
       description: 'Lepas bungkaman member di server ini.',
       moderating: true,
       usage: [
-        { optional: ['--force'] },
         { require: ['userID', 'userMention'] }
       ]
     })

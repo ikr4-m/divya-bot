@@ -11,8 +11,9 @@ const db = low(adapter)
  */
 module.exports = async (client, message, args) => {
   const guild = message.guild
-  const member = message.mentions.members.first() || guild.members.get(args[1])
+  const member = message.mentions.members.first() || guild.members.get(args[0])
   const key = `${guild.id}|${member.id}`
+
   const role = guild.roles.find(r => r.name === 'Muted')
 
   if (role.size === 0) {
@@ -21,13 +22,11 @@ module.exports = async (client, message, args) => {
   }
 
   // Paksa hapus
-  if (args[0] !== '--force') {
-    if (!db.has(key)) {
-      message.reply('member tidak pernah dimute sebelumnya atau server sudah restart. Silahkan diperiksa terlebih dahulu.')
-      return undefined
-    } else {
-      db.unset(key).write()
-    }
+  if (!db.has(key)) {
+    message.reply('member tidak pernah dimute sebelumnya atau server sudah restart. Silahkan diperiksa terlebih dahulu.')
+    return undefined
+  } else {
+    db.unset(key).write()
   }
 
   await member.removeRoles([role])
