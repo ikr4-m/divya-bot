@@ -11,6 +11,7 @@ module.exports = async (client, message, args) => {
     message.reply(client.usage('Moderation::Kick'))
     return undefined
   }
+  if (memberKick.hasPermission('MANAGE_ROLES')) return message.reply('anda tidak bisa mengeksekusi staff.')
 
   // Reason dari member
   const _reason = args.slice(1).join(' ')

@@ -20,6 +20,7 @@ module.exports = async (client, message, args) => {
     message.reply(client.usage('Moderation::Mute'))
     return undefined
   }
+  if (member.hasPermission('MANAGE_ROLES')) return message.reply('anda tidak bisa mengeksekusi staff.')
 
   // Eksekusi timesnya
   const timeInString = []

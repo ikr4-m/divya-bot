@@ -26,5 +26,5 @@ module.exports = async (client, message, args) => {
   // Kedua, delay 1 detik terus boongin
   setTimeout(() => {
     message.channel.send('Tapi boong.')
-  }, 1000)
+  }, 5000)
 }

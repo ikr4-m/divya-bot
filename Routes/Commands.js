@@ -97,6 +97,15 @@ module.exports = (client) => {
       ],
       permission: ['BAN_MEMBERS']
     })
+    Router.load('Unban', {
+      command: 'unban',
+      description: 'Lepas banned orang dari server ini.',
+      moderating: true,
+      usage: [
+        { require: ['userID'] }
+      ],
+      permission: ['BAN_MEMBERS']
+    })
     Router.load('Warn', {
       command: 'warn',
       description: 'Beri peringatan pada orang di server ini.',
