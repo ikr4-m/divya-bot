@@ -64,7 +64,7 @@ module.exports = async (client, message, args) => {
     timeInString.push('DM Staff yang bersangkutan untuk lebih lanjut.')
   }
 
-  member.setRoles([role])
+  member.addRole(role)
     .then(async msg => {
       const muteSender = {
         reason: reason,

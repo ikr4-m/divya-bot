@@ -69,7 +69,7 @@ module.exports = async (client, message, args) => {
     console.log('Masuk')
     switch (warnCount) {
       case 2:
-        memberWarn.setRoles([role])
+        memberWarn.addRole(role)
         db.set(`${guild.id}|${memberWarn.id}`, {
           reason: reason,
           timestamp: now.add(6, 'hours').format('YYYY-MM-DD HH:mm:ss'),
@@ -90,7 +90,7 @@ module.exports = async (client, message, args) => {
         }
         break
       case 4:
-        memberWarn.setRoles([role])
+        memberWarn.addRole(role)
         db.set(`${guild.id}|${memberWarn.id}`, {
           reason: reason,
           timestamp: now.add(1, 'day').format('YYYY-MM-DD HH:mm:ss'),
