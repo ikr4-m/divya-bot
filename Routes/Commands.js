@@ -172,4 +172,15 @@ module.exports = (client) => {
       ]
     })
   })
+
+  /**
+   * Server Group
+   * Manipulasi server di sini
+   */
+  Router.group('Server').then(Router => {
+    Router.load('Registration', {
+      command: ['register', 'regist'],
+      description: 'Sebelum masuk di server ini, kamu harus register terlebih dahulu'
+    })
+  })
 }

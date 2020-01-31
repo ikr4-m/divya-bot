@@ -1,4 +1,4 @@
 node_modules/
 package-lock.json
 .env
-Components/Database/mute.json
+Components/Database/*.json
