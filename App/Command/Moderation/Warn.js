@@ -66,7 +66,7 @@ module.exports = async (client, message, args) => {
 
   // Apabila dia adalah member biasa, eksekusi
   if (!memberWarn.hasPermission('VIEW_AUDIT_LOG')) {
-    console.log('Masuk')
+    // console.log('Masuk')
     switch (warnCount) {
       case 2:
         memberWarn.addRole(role)
