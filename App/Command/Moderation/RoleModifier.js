@@ -1,5 +1,7 @@
-const { Client, Message } = require('@components/DiscordClient') // eslint-disable-line
-const { Role } = require('discord.js') // eslint-disable-line
+/* eslint-disable */
+const { Client, Message } = require('@components/DiscordClient')
+const { Role, GuildMember } = require('discord.js')
+/* eslint-enable */
 
 /**
  * @param {Client} client
@@ -18,10 +20,20 @@ module.exports = async (client, message, args) => {
 
   /** @type {Role[]} */
   const roleResolve = []
-  roleStr.forEach(role => {
+  roleStr.forEach(async role => {
     const r = guild.roles.get(role) || guild.roles.find(r => r.name === role) || null
-    if (!r) return message.reply(`tidak ada role yang bernama **${role} di sini**`)
-    else roleResolve.push(r)
+    if (!r) return message.reply(`tidak ada role yang bernama **${role}** di sini`)
+    else {
+      // Level Check
+      // Logikanya gini, kita ukur level rolenya berdasarkan authornya.
+      // Apabila role yang diminta oleh author itu lebih besar levelnya
+      // daripada role level terakhir maka kembaliannya adalah 1.
+
+      const highestLevel = await highestRoleLevel(member)
+      highestLevel >= r.position
+        ? roleResolve.push(r)
+        : message.reply(`role **${r.name}** terlalu tinggi darimu.`)
+    }
   })
 
   if (command === 'add') addRole()
@@ -42,6 +54,21 @@ module.exports = async (client, message, args) => {
     roleResolve.forEach(async role => {
       await member.addRole(role)
       await message.channel.send(`Role **${role.name}** berhasil ditambahkan pada <@!${member.id}>!`)
+    })
+  }
+
+  /**
+   * Cari level tertinggi dari suatu role
+   * @param {GuildMember} member - Member Guild
+   * @returns {Promise<number>}
+   */
+  async function highestRoleLevel (member) {
+    return new Promise((resolve) => {
+      let highestLevel = 0
+      member.roles.forEach(r => {
+        highestLevel = highestLevel > r.position ? r.position : highestLevel
+      })
+      resolve(highestLevel)
     })
   }
 }
