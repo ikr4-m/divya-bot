@@ -29,8 +29,10 @@ module.exports = async (client, message, args) => {
       // Apabila role yang diminta oleh author itu lebih besar levelnya
       // daripada role level terakhir maka kembaliannya adalah 1.
 
-      const highestLevel = highestRoleLevel(member)
-      // console.log(`Highest Level: ${highestLevel}\nRole Position: ${r.position}`)
+      let highestLevel = 0
+      message.guild.members.get(message.author.id).roles.forEach(r => {
+        if (r.position > highestLevel) highestLevel = r.position
+      })
       highestLevel > r.position
         ? roleResolve.push(r)
         : message.reply(`role **${r.name}** terlalu tinggi darimu.`)
@@ -56,17 +58,5 @@ module.exports = async (client, message, args) => {
       await member.addRole(role)
       await message.channel.send(`Role **${role.name}** berhasil ditambahkan pada <@!${member.id}>!`)
     })
-  }
-
-  /**
-   * Cari level tertinggi dari suatu role
-   * @param {GuildMember} member - Member Guild
-   */
-  function highestRoleLevel (member) {
-    let highestLevel = 0
-    member.roles.forEach(r => {
-      if (r.position > highestLevel) highestLevel = r.position
-    })
-    return highestLevel
   }
 }
