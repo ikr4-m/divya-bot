@@ -30,6 +30,7 @@ module.exports = async (client, message, args) => {
       // daripada role level terakhir maka kembaliannya adalah 1.
 
       const highestLevel = highestRoleLevel(member)
+      // console.log(`Highest Level: ${highestLevel}\nRole Position: ${r.position}`)
       highestLevel > r.position
         ? roleResolve.push(r)
         : message.reply(`role **${r.name}** terlalu tinggi darimu.`)
@@ -64,7 +65,7 @@ module.exports = async (client, message, args) => {
   function highestRoleLevel (member) {
     let highestLevel = 0
     member.roles.forEach(r => {
-      highestLevel = highestLevel > r.position ? r.position : highestLevel
+      if (r.position > highestLevel) highestLevel = r.position
     })
     return highestLevel
   }
