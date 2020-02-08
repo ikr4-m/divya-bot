@@ -20,7 +20,7 @@ module.exports = async (client, message, args) => {
 
   /** @type {Role[]} */
   const roleResolve = []
-  roleStr.forEach(async role => {
+  roleStr.forEach(role => {
     const r = guild.roles.get(role) || guild.roles.find(r => r.name === role) || null
     if (!r) return message.reply(`tidak ada role yang bernama **${role}** di sini`)
     else {
@@ -29,8 +29,8 @@ module.exports = async (client, message, args) => {
       // Apabila role yang diminta oleh author itu lebih besar levelnya
       // daripada role level terakhir maka kembaliannya adalah 1.
 
-      const highestLevel = await highestRoleLevel(member)
-      highestLevel >= r.position
+      const highestLevel = highestRoleLevel(member)
+      highestLevel > r.position
         ? roleResolve.push(r)
         : message.reply(`role **${r.name}** terlalu tinggi darimu.`)
     }
@@ -60,15 +60,12 @@ module.exports = async (client, message, args) => {
   /**
    * Cari level tertinggi dari suatu role
    * @param {GuildMember} member - Member Guild
-   * @returns {Promise<number>}
    */
-  async function highestRoleLevel (member) {
-    return new Promise((resolve) => {
-      let highestLevel = 0
-      member.roles.forEach(r => {
-        highestLevel = highestLevel > r.position ? r.position : highestLevel
-      })
-      resolve(highestLevel)
+  function highestRoleLevel (member) {
+    let highestLevel = 0
+    member.roles.forEach(r => {
+      highestLevel = highestLevel > r.position ? r.position : highestLevel
     })
+    return highestLevel
   }
 }
