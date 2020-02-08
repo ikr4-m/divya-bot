@@ -171,6 +171,14 @@ module.exports = (client) => {
         { require: ['roleName/roleID', '...role'] }
       ]
     })
+    Router.load('Prune', {
+      command: 'prune',
+      description: 'Bulk Delete/Prune/Apus pesan beruntun',
+      moderating: true,
+      usage: [
+        { require: ['messageCount'] }
+      ]
+    })
   })
 
   /**
