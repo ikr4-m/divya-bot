@@ -6,6 +6,11 @@ import ArgsToString from './Command/ArgsToString'
 export default class Constant {
   public usage (message: Message, name: string | string[], args: CommandArguments[]) {
     const fixedName = typeof name !== 'string' ? name[0] : name
-    return message.reply(`the correct usage is:\n\`\`\`${Config.botPrefix}${fixedName} ${ArgsToString(args)}\`\`\``)
+    return message.reply(`penggunaan yang tepat adalah:\n\`\`\`${Config.botPrefix}${fixedName} ${ArgsToString(args)}\`\`\``)
+  }
+
+  public errReason (err: any) {
+    console.error(err)
+    return `sepertinya ada kesalahan dengan perintah ini:\n\`\`\`${err.message}\`\`\``
   }
 }

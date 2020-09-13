@@ -6,14 +6,17 @@ module.exports = {
    * @param {QueryInterface} query
    */
   up: async (query) => {
-    await query.createTable('test', {
+    await query.createTable('tbl_staff_list', {
       id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         autoIncrement: true,
         primaryKey: true
       },
-      input: {
+      serverID: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      roleID: {
         type: Sequelize.STRING,
         allowNull: false
       }
@@ -23,6 +26,6 @@ module.exports = {
    * @param {QueryInterface} query
    */
   down: async (query) => {
-    await query.dropTable('test')
+    await query.dropTable('tbl_staff_list')
   }
 }
