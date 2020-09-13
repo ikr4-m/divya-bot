@@ -1,14 +1,16 @@
 {
-    "botPrefix": "b.",
+    "botPrefix": "gs!",
     "cooldownDefault": 5,
     "owner": [
         "379616881272946688",
         "709668494563868695"
     ],
     "gamePresence": [
-        "This is bot",
-        "I'm cool!"
+        "Daddy! -w-",
+        "Not a bot, but a robot.",
+        "Watching you all",
+        "Love you all!! (●♡∀♡)"
     ],
-    "botColor": "0xa11dd1",
-    "botName": "Discord-Template"
+    "botColor": "0xbd34eb",
+    "botName": "Felice"
 }

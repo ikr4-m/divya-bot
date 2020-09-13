@@ -12,7 +12,7 @@ export default class Ping extends Command {
 
   public async run(_client: Client, message: Message, _args: string[]): Promise<any> {
     const now = Date.now()
-    message.channel.send(':ping_pong: Wait for it...')
+    message.channel.send(':ping_pong: Tunggu sebentar...')
       .then(async message => {
         if (!message) return
         const diff = `${(Date.now() - now).toString()} ms`

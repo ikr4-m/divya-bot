@@ -33,11 +33,11 @@ export default class Ping extends Command {
       embed
         .setTitle(`${client.config.botName} Command List`)
         .setDescription(
-          `To check the use of commands on this bot, type in the chat: \n\`\`\`${client.config.botPrefix}help <command>\`\`\`\n` +
-          'Please note, for giving arguments:\n' +
-          `\`${client.config.botPrefix}com [args]\` **>>** The command argument is not required to be written.\n` +
-          `\`${client.config.botPrefix}com <args>\` **>>** The command argumen is required to be written.\n` +
-          `\`${client.config.botPrefix}com [menu|m]\` **>>** You can choose an argument between the square brackets.`
+          `Untuk mengecek perintah command, silahkan ketik: \n\`\`\`${client.config.botPrefix}help <command>\`\`\`\n` +
+          'Untuk catatan, penggunaan argumen untuk bot ini:\n' +
+          `\`${client.config.botPrefix}com [args]\` **>>** Argumen command ini hanya bersifat opsional.\n` +
+          `\`${client.config.botPrefix}com <args>\` **>>** Argumen command ini bersifat wajib.\n` +
+          `\`${client.config.botPrefix}com [menu|m]\` **>>** Kamu bisa memilih di antara argumen yang telah diberi.`
         )
 
       help.forEach(category => {
@@ -58,10 +58,10 @@ export default class Ping extends Command {
         ? getCmd.options.name.slice(1)
         : []
       embed
-        .setAuthor(`${client.config.botPrefix}${command} command usage.`)
-        .addField('Description', getCmd.options.description)
-        .addField('Alias', args.length === 0 ? 'No aliases.' : `${client.config.botPrefix}${args.join(`, ${client.config.botPrefix}`)}`)
-        .addField('Example', `${client.config.botPrefix}${!getCmd.options.example ? command : getCmd.options.example}`)
+        .setAuthor(`Penggunaan Command ${client.config.botPrefix}${command}.`)
+        .addField('Deskripsi', getCmd.options.description)
+        .addField('Alias', args.length === 0 ? 'Tidak ada alias.' : `${client.config.botPrefix}${args.join(`, ${client.config.botPrefix}`)}`)
+        .addField('Contoh', `${client.config.botPrefix}${!getCmd.options.example ? command : getCmd.options.example}`)
     }
 
     message.channel.send(`<@!${message.author.id}>`, { embed: embed })
