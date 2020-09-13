@@ -23,7 +23,7 @@ export default class Ping extends Command {
 
     member.kick(`${rlReason} | ${message.author.tag}`)
       .then(() => {
-        message.reply('member tersebut berhasil ditendang!')
+        message.reply(`member tersebut berhasil ditendang dengan alasan:\n\`\`\`${rlReason}\`\`\``)
       })
       .catch(err => {
         message.reply(client.constant.errReason(err))

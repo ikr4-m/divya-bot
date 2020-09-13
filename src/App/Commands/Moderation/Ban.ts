@@ -23,7 +23,7 @@ export default class Ping extends Command {
 
     member.ban({ reason: rlReason })
       .then(() => {
-        message.reply('member tersebut berhasil dipalu!')
+        message.reply(`member tersebut berhasil dipalu dengan alasan:\n\`\`\`${rlReason}\`\`\``)
       })
       .catch(err => {
         message.reply(client.constant.errReason(err))
