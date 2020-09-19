@@ -7,8 +7,10 @@ export default {
     status: true,
     interval: 5000,
     message: [
-      'Bot is activated!',
-      'Hello guys!'
+      "Daddy! -w-",
+      "Not a bot, but a robot.",
+      "Watching you all",
+      "Love you all!! (●♡∀♡)"
     ]
   }
 }

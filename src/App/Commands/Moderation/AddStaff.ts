@@ -23,7 +23,9 @@ export default class Ping extends Command {
 
     const user = await message.guild.members.fetch(message.author.id)
     if (!user) return
-    if (!user.hasPermission('ADMINISTRATOR') || !client.config.owner.includes(user.id)) return
+    if (!user.hasPermission('ADMINISTRATOR') || !client.config.owner.includes(user.id)) {
+      return message.reply('hanya ADMIN yang bisa mengeksekusi perintah ini.')
+    }
 
     const role = await message.guild.roles.fetch(roleID)
     if (!role) return message.reply('role tidak ditemukan!')
