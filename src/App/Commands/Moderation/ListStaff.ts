@@ -16,7 +16,7 @@ export default class Ping extends Command {
     const data = await MStaffList.findAll({ where: { serverID: guildID } })
 
     let count = 1
-    let returningData = []
+    const returningData = []
     data.forEach(da => {
       returningData.push(`${count}. <@&${da.roleID}>`)
       count++

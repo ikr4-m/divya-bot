@@ -11,9 +11,9 @@ export function GetStaffList (serverID: string): Promise<string[]> {
 }
 
 export async function ifStaff (member: GuildMember): Promise<boolean> {
-  return new Promise(async (resolve, _reject) => {
+  const staffList = await GetStaffList(member.guild.id)
+  return new Promise((resolve, _reject) => {
     if (!member) resolve(false)
-    const staffList = await GetStaffList(member.guild.id)
     let triggerStaff = false
     staffList.forEach(st => {
       if (member.roles.cache.has(st)) triggerStaff = true
