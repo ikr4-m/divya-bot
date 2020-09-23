@@ -15,7 +15,7 @@ export default class Debug extends Events {
         const keys = key.split(':')
         const serverID = keys[0]
         const memberID = keys[1]
-        
+
         const guild = client.guilds.cache.filter(g => g.id === serverID).first()
         if (!guild) return
         const member = guild.members.cache.filter(m => m.id === memberID).first()

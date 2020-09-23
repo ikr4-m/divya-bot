@@ -35,13 +35,13 @@ export default class Ping extends Command {
 
     await member.createDM()
       .then(memberCH => {
-        memberCH.send(`Anda telah ditendang dari ${message.guild.name} dengan alasan:\n\`\`\`${reason}\`\`\``)
+        memberCH.send(`Anda telah dipalu dari ${message.guild.name} dengan alasan:\n\`\`\`${reason}\`\`\``)
       })
       .catch(_err => {
         // Do fucking nothing
       })
 
-    await member.ban({ reason: rlReason })
+    await member.ban({ reason: `${rlReason} | ${message.author.tag}` })
       .then(() => {
         message.reply(`member tersebut berhasil dipalu dengan alasan:\n\`\`\`${rlReason}\`\`\``)
       })
