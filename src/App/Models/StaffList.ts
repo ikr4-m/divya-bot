@@ -1,13 +1,24 @@
 import { Sequelize } from './_Connection'
-import { DataTypes, Model } from 'sequelize'
+import { DataTypes, Model, Optional } from 'sequelize'
 
-class StaffList extends Model {
-  public id!: number
-  public serverID!: string
-  public roleID!: string
+/**
+ * Model list
+ */
+interface IStaffList {
+  id: number
+  serverID: string
+  roleID: string
 }
+/**
+ * Optional input
+ */
+type IOptionalProperty = 'id'
 
-StaffList.init(
+interface OptionalProperty extends Optional<IStaffList, IOptionalProperty> {}
+interface UStaffList extends Model<IStaffList, OptionalProperty>, IStaffList {}
+
+export default Sequelize.define<UStaffList>(
+  'tbl_staff_list',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -15,20 +26,17 @@ StaffList.init(
       primaryKey: true
     },
     serverID: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false
     },
     roleID: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false
     }
   },
   {
-    tableName: 'tbl_staff_list',
-    sequelize: Sequelize,
+    freezeTableName: true,
     createdAt: false,
     updatedAt: false
   }
 )
-
-export default StaffList

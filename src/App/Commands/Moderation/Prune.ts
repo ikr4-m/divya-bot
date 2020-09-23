@@ -20,7 +20,7 @@ export default class Ping extends Command {
     const amount = parseInt(args[0])
     if (!amount) return client.constant.usage(message, this.options.name, this.options.args)
 
-    const ifStaff = await IfStaff(executor.roles.cache)
+    const ifStaff = await IfStaff(executor)
     if (!ifStaff || !client.config.owner.includes(executor.id)) {
       if (!executor.hasPermission('ADMINISTRATOR')) {
         return message.reply('anda tidak memiliki ijin untuk menggunakan command ini!')

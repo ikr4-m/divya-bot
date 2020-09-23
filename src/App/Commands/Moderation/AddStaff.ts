@@ -35,12 +35,10 @@ export default class Ping extends Command {
       MStaffList
         .findOne({ where: { serverID: message.guild.id, roleID: roleID } })
         .then(async data => {
-          if (data) {
-            await data.update({ serverID: message.guild.id, roleID: roleID })
-          } else {
-            await MStaffList.create({ serverID: message.guild.id, roleID: roleID })
-          }
-          await message.reply(`<@&${data.roleID}> berhasil ditambahkan!`)
+          data
+            ? await data.update({ serverID: message.guild.id, roleID: roleID })
+            : await MStaffList.create({ serverID: message.guild.id, roleID: roleID })
+          await message.reply(`<@&${roleID}> berhasil ditambahkan!`)
         })
         .catch(err => {
           message.reply(client.constant.errReason(err))

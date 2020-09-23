@@ -1,8 +1,14 @@
+import { Collection } from 'discord.js'
+import { Moment } from 'moment'
+
 /**
  * You can use this state to store your global variable to your bot
  * like storing music queue or something like that.
  */
 export default {
+  /**
+   * Menjelaskan status presence secara global.
+   */
   presence: {
     status: true,
     interval: 5000,
@@ -12,5 +18,11 @@ export default {
       "Watching you all",
       "Love you all!! (●♡∀♡)"
     ]
-  }
+  },
+
+  /**
+   * Diisi untuk temporal mute di sini.
+   * @description Untuk keynya, serverID:memberID
+   */
+  tempMute: new Collection<string, Moment>()
 }
