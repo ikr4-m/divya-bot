@@ -20,6 +20,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      staffID: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       reason: {
         type: Sequelize.TEXT,
         allowNull: false

@@ -21,7 +21,7 @@ export default class Ping extends Command {
     if (!amount) return client.constant.usage(message, this.options.name, this.options.args)
 
     const ifStaff = await IfStaff(executor)
-    if (!ifStaff || !client.config.owner.includes(executor.id)) {
+    if (!ifStaff) {
       if (!executor.hasPermission('ADMINISTRATOR')) {
         return message.reply('anda tidak memiliki ijin untuk menggunakan command ini!')
       }
@@ -30,7 +30,7 @@ export default class Ping extends Command {
     await message.delete()
     await message.channel.bulkDelete(amount)
       .then(_channel => {
-        message.channel.send(`Berhasil menghapus pesan sebanyak ${amount}`)
+        message.channel.send(`Berhasil menghapus pesan sebanyak ${amount} pesan.`)
           .then(msg => setTimeout(() => msg.delete(), 3000))
       })
       .catch(err => {

@@ -26,7 +26,7 @@ export default class Ping extends Command {
     if (!member || !momod) return client.constant.usage(message, this.options.name, this.options.args)
 
     const ifStaff = await IfStaff(momod)
-    if (!ifStaff || !client.config.owner.includes(momod.id)) {
+    if (!ifStaff) {
       if (!momod.hasPermission('ADMINISTRATOR')) {
         return message.reply('anda tidak memiliki ijin untuk menggunakan command ini!')
       }
@@ -38,16 +38,18 @@ export default class Ping extends Command {
 
     // Dapatkan list
     const warnList = await MWarnList.findAll({ where: { serverID: member.guild.id, memberID: member.id } })
-    let counting = warnList.length
+    let counting = warnList.length + 1
+    let res = `<@!${member.id}> berhasil diwarn dengan alasan:\n\`\`\`${rlReason}\`\`\``
 
     // Selain staff, anda tidak mendapatkan warn apapun itu
-    if (!ifStaff || !client.config.owner.includes(momod.id)) {
+    if (!await IfStaff(member) && !member.hasPermission('ADMINISTRATOR')) {
+      res = `<@!${member.id}> berhasil diwarn untuk ke-${counting} dengan alasan:\n\`\`\`${rlReason}\`\`\``
       await MWarnList.create({
         serverID: member.guild.id,
         memberID: member.id,
-        reason: rlReason
+        reason: rlReason,
+        staffID: momod.id
       })
-      counting++
 
       switch (counting) {
         // Mute 3 jam
@@ -111,6 +113,6 @@ export default class Ping extends Command {
       }
     }
 
-    await message.reply(`<@!${member.id}> berhasil diwarn untuk ke-${counting} dengan alasan:\n\`\`\`${rlReason}\`\`\``)
+    await message.reply(res)
   }
 }

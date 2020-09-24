@@ -27,7 +27,7 @@ export default class Ping extends Command {
     if (!member || !momod) return client.constant.usage(message, this.options.name, this.options.args)
 
     const ifStaff = await IfStaff(momod)
-    if (!ifStaff || !client.config.owner.includes(momod.id)) {
+    if (!ifStaff) {
       if (!momod.hasPermission('ADMINISTRATOR')) {
         return message.reply('anda tidak memiliki ijin untuk menggunakan command ini!')
       }

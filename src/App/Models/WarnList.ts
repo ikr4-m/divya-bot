@@ -8,6 +8,7 @@ interface IWarnList {
   id: number
   serverID: string
   memberID: string
+  staffID: string
   reason: string
 }
 /**
@@ -19,7 +20,7 @@ interface OptionalProperty extends Optional<IWarnList, IOptionalProperty> {}
 interface UWarnList extends Model<IWarnList, OptionalProperty>, IWarnList {}
 
 export default Sequelize.define<UWarnList>(
-  'tbl_temp_mute',
+  'tbl_warn_list',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -31,6 +32,10 @@ export default Sequelize.define<UWarnList>(
       allowNull: false
     },
     memberID: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    staffID: {
       type: DataTypes.STRING,
       allowNull: false
     },
