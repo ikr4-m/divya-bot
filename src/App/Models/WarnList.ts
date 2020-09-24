@@ -10,6 +10,7 @@ interface IWarnList {
   memberID: string
   staffID: string
   reason: string
+  dateExecuted: string
 }
 /**
  * Optional input
@@ -41,6 +42,10 @@ export default Sequelize.define<UWarnList>(
     },
     reason: {
       type: DataTypes.TEXT,
+      allowNull: false
+    },
+    dateExecuted: {
+      type: 'DATETIME',
       allowNull: false
     }
   },

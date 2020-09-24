@@ -1,6 +1,7 @@
 import { Message } from 'discord.js'
 import Command from '../../Command'
 import Client from '../../Client'
+import Moment from 'moment'
 import MWarnList from '../../Models/WarnList'
 import { ifStaff as IfStaff } from '../../Module/Moderation/StaffList'
 import { setTempMute } from '../../Module/Moderation/TempMute'
@@ -48,7 +49,8 @@ export default class Ping extends Command {
         serverID: member.guild.id,
         memberID: member.id,
         reason: rlReason,
-        staffID: momod.id
+        staffID: momod.id,
+        dateExecuted: Moment().format()
       })
 
       switch (counting) {

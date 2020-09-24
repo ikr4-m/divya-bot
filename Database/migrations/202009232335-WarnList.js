@@ -27,6 +27,10 @@ module.exports = {
       reason: {
         type: Sequelize.TEXT,
         allowNull: false
+      },
+      dateExecuted: {
+        type: 'DATETIME',
+        allowNull: false
       }
     })
   },
