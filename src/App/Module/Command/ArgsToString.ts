@@ -9,7 +9,7 @@ export default (args: CommandArguments[]) => {
     if (arg.require === false && arg.type === 'BLOCK') {
       str += `[${arg.name}] `
     }
-    if (arg.require === true && arg.type === 'FLAG') {
+    if (arg.type === 'FLAG') {
       str += `--${arg.name} `
     }
   })
