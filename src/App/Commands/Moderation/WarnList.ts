@@ -33,6 +33,7 @@ export default class Ping extends Command {
     let count = 1
     WarnList.forEach(wlist => {
       retStr += `${count}. ${wlist.reason} | <@!${wlist.staffID}> [${Moment(wlist.dateExecuted).utcOffset('+08:00').format('YYYY-MM-DD HH:mm:ss')} WITA]\n`
+      count++
     })
     embed.setDescription(retStr.length === 0 ? 'Masih kosong' : retStr)
 

@@ -39,7 +39,7 @@ export default class Ping extends Command {
 
     // Dapatkan list
     const warnList = await MWarnList.findAll({ where: { serverID: member.guild.id, memberID: member.id } })
-    let counting = warnList.length + 1
+    const counting = warnList.length + 1
     let res = `<@!${member.id}> berhasil diwarn dengan alasan:\n\`\`\`${rlReason}\`\`\``
 
     // Selain staff, anda tidak mendapatkan warn apapun itu
