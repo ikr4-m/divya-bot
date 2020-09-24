@@ -35,6 +35,7 @@ export default {
     personInCharge: '',
     serverID: '',
     channelID: '',
+    eventName: '',
     uniqueMember: [],
     host: [],
     guest: [],
