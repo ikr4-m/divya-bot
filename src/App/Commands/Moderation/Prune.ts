@@ -28,6 +28,7 @@ export default class Ping extends Command {
     }
 
     await message.delete()
+    if (message.channel.type !== 'text') return message.reply('perintah ini hanya dapat digunakan di Text Channel server.')
     await message.channel.bulkDelete(amount)
       .then(_channel => {
         message.channel.send(`Berhasil menghapus pesan sebanyak ${amount} pesan.`)
