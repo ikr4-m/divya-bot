@@ -8,6 +8,11 @@ import moment from 'moment'
  */
 export default {
   /**
+   * Uptime saat bot ini pertama kali dinyalakan
+   */
+  uptime: moment(),
+  
+  /**
    * Menjelaskan status presence secara global.
    */
   presence: {

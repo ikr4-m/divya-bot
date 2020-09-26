@@ -24,7 +24,8 @@ export default class Ping extends Command {
       .setTimestamp()
       .setColor(client.config.botColor)
       .setFooter(
-        `(C) ${Moment().format('YYYY')} - ${client.config.botName} | Running ${cmd.size} command${cmd.size > 1 ? 's' : ''}`
+        `(C) ${Moment().format('YYYY')} - ${client.config.botName} | Running ${cmd.size} command${cmd.size > 1 ? 's' : ''}`,
+        client.user.displayAvatarURL()
       )
       .setThumbnail(client.user.displayAvatarURL())
 
