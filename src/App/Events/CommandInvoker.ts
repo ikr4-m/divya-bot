@@ -40,7 +40,9 @@ export default class Debug extends Events {
       console.error(error)
       message.reply('something wrong with server. Try again later.')
     } finally {
-      console.log(`<${message.author.id}> executing ${commandName} in <${message.guild.id}> server.`)
+      console.log(
+        `${message.author.tag} [${message.author.id}] executing "${commandName}" in <${message.guild.name}|${message.channel.id}> server.`
+      )
     }
   }
 }

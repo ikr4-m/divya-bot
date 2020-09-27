@@ -17,9 +17,11 @@ export default class Ping extends Command {
   }
 
   public async run(client: Client, message: Message, args: string[]): Promise<any> {
-    const mode = args[0].toLowerCase()
+    const _mode = args[0]
     const roleID = args[1]
-    if ((!mode || !roleID) || !['add', 'remove'].includes(mode)) return client.constant.usage(message, this.options.name, this.options.args)
+    if (!_mode || !roleID) return client.constant.usage(message, this.options.name, this.options.args)
+    const mode = _mode.toLowerCase()
+    if (!['add', 'remove'].includes(mode)) return client.constant.usage(message, this.options.name, this.options.args)
 
     const user = await message.guild.members.fetch(message.author.id)
     if (!user) return
