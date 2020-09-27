@@ -21,6 +21,7 @@ $ npm run migrate:down
 $ npm run migrate:up
 ```
 Alasan kenapa mesti di migrate down dikarenakan ada dummy table di dalam database-sample hasil fork dari [template ini](https://github.com/skymunn/Discord-Template/).
+
 6. Kemudian, kamu build terlebih dahulu botnya dengan perintah:
 ```bash
 $ npm run build
@@ -34,7 +35,6 @@ $ npm run build
     SAWERIA_ID | null | Tidak usah diisi, untuk saweria
 8. Jalankan botnya dengan perintah:
 ```bash
-# Untuk nyalain botnya
 $ npm start
 ```
 
