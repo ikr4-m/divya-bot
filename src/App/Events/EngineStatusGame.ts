@@ -10,11 +10,10 @@ export default class Ready extends Events {
     setInterval(() => {
       const state = client.state
       if (state.presence.status) {
+        const msg = state.presence.message[Math.floor(Math.random() * state.presence.message.length)]
         client.user.setPresence({
           activity: {
-            name: `
-              ${client.config.botPrefix}help | ${state.presence.message[Math.floor(Math.random() * state.presence.message.length)]}
-            `,
+            name: `${client.config.botPrefix}help | ${msg}`,
             type: 'PLAYING'
           }
         })

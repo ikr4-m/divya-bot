@@ -35,7 +35,9 @@ export default class Ping extends Command {
       retStr += `${count}. ${wlist.reason} | <@!${wlist.staffID}> [${Moment(wlist.dateExecuted).utcOffset('+08:00').format('YYYY-MM-DD HH:mm:ss')} WITA]\n`
       count++
     })
-    embed.setDescription(retStr.length === 0 ? 'Masih kosong' : retStr)
+    embed
+      .addField('Warn/Pelanggaran', retStr.length === 0 ? 'Masih kosong' : retStr)
+      .addField('Badword', 'Error: Not Implemented.')
 
     await message.channel.send(`<@!${message.author.id}>`, { embed })
   }

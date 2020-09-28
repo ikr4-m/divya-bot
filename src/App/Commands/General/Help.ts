@@ -2,6 +2,7 @@ import { Message, MessageEmbed } from 'discord.js'
 import Command from '../../Command'
 import Client from '../../Client'
 import Moment from 'moment'
+import ArgsToString from '../../Module/Command/ArgsToString'
 
 export default class Ping extends Command {
   constructor() {
@@ -62,6 +63,7 @@ export default class Ping extends Command {
         .setAuthor(`Penggunaan Command ${client.config.botPrefix}${command}.`)
         .addField('Deskripsi', getCmd.options.description)
         .addField('Alias', args.length === 0 ? 'Tidak ada alias.' : `${client.config.botPrefix}${args.join(`, ${client.config.botPrefix}`)}`)
+        .addField('Penggunaan', `${client.config.botPrefix}${command}${typeof getCmd.options.args === 'undefined' ? '' : ` ${ArgsToString(getCmd.options.args)}`}`)
         .addField('Contoh', `${client.config.botPrefix}${!getCmd.options.example ? command : getCmd.options.example}`)
     }
 
