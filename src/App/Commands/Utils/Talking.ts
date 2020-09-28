@@ -3,7 +3,7 @@ import Command from '../../Command'
 import Client from '../../Client'
 import Yargs from 'yargs-parser'
 
-export default class Ping extends Command {
+export default class Talking extends Command {
   constructor() {
     super({
       name: 'talk',

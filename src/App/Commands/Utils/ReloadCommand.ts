@@ -2,7 +2,7 @@ import { Message } from 'discord.js'
 import Command from '../../Command'
 import Client from '../../Client'
 
-export default class Ping extends Command {
+export default class ReloadCommand extends Command {
   constructor() {
     super({
       name: 'reload',

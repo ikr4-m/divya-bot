@@ -6,7 +6,7 @@ import MWarnList from '../../Models/WarnList'
 import { ifStaff as IfStaff } from '../../Module/Moderation/StaffList'
 import { setTempMute } from '../../Module/Moderation/TempMute'
 
-export default class Ping extends Command {
+export default class Warn extends Command {
   constructor() {
     super({
       name: 'warn',

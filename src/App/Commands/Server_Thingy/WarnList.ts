@@ -4,7 +4,7 @@ import Client from '../../Client'
 import MWarnList from '../../Models/WarnList'
 import Moment from 'moment'
 
-export default class Ping extends Command {
+export default class WarnList extends Command {
   constructor() {
     super({
       name: 'warnlist',

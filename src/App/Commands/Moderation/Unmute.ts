@@ -4,7 +4,7 @@ import Client from '../../Client'
 import MTempMute from '../../Models/TempMute'
 import { ifStaff as IfStaff } from '../../Module/Moderation/StaffList'
 
-export default class Ping extends Command {
+export default class Unmute extends Command {
   constructor() {
     super({
       name: 'unmute',

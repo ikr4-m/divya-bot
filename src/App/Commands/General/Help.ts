@@ -4,7 +4,7 @@ import Client from '../../Client'
 import Moment from 'moment'
 import ArgsToString from '../../Module/Command/ArgsToString'
 
-export default class Ping extends Command {
+export default class Help extends Command {
   constructor() {
     super({
       name: 'help',

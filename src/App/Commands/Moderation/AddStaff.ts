@@ -3,7 +3,7 @@ import Command from '../../Command'
 import Client from '../../Client'
 import MStaffList from '../../Models/StaffList'
 
-export default class Ping extends Command {
+export default class AddStaff extends Command {
   constructor() {
     super({
       name: 'managestaff',

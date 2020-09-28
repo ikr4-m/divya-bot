@@ -4,7 +4,7 @@ import Client from '../../Client'
 import Axios from 'axios'
 import Moment from 'moment'
 
-export default class Ping extends Command {
+export default class BotInfo extends Command {
   constructor() {
     super({
       name: 'botinfo',

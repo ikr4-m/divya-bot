@@ -3,7 +3,7 @@ import Command from '../../Command'
 import Client from '../../Client'
 import Moment from 'moment'
 
-export default class Ping extends Command {
+export default class UserInfo extends Command {
   constructor() {
     super({
       name: ['userinfo', 'uinfo'],

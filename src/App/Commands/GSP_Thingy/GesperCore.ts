@@ -6,7 +6,7 @@ import { ifEventCommitee } from '../../Module/GSP/EventCommitee'
 import { ifStaff } from '../../Module/Moderation/StaffList'
 // import MEvtCom from '../../Models/EventCommiteeGSP'
 
-export default class Ping extends Command {
+export default class GesperCore extends Command {
   constructor() {
     super({
       name: 'gesper',

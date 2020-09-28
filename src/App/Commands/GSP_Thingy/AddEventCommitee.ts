@@ -4,7 +4,7 @@ import Client from '../../Client'
 import { ifStaff as IfStaff } from '../../Module/Moderation/StaffList'
 import MEvtCom from '../../Models/EventCommiteeGSP'
 
-export default class Ping extends Command {
+export default class AddEventCommitee extends Command {
   constructor() {
     super({
       name: 'gspec',

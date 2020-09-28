@@ -3,7 +3,7 @@ import Command from '../../Command'
 import Client from '../../Client'
 import { ifStaff as IfStaff } from '../../Module/Moderation/StaffList'
 
-export default class Ping extends Command {
+export default class Ban extends Command {
   constructor() {
     super({
       name: 'ban',

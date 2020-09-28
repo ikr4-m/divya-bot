@@ -3,7 +3,7 @@ import Command from '../../Command'
 import Client from '../../Client'
 import Util from 'util'
 
-export default class Ping extends Command {
+export default class Evaluation extends Command {
   constructor() {
     super({
       name: 'eval',

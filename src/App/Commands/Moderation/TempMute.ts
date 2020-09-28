@@ -4,7 +4,7 @@ import Client from '../../Client'
 import { ifStaff as IfStaff } from '../../Module/Moderation/StaffList'
 import { isTimeValid, setTempMute } from '../../Module/Moderation/TempMute'
 
-export default class Ping extends Command {
+export default class TempMute extends Command {
   constructor() {
     super({
       name: ['tempmute', 'tmute'],

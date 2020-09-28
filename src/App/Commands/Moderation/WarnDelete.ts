@@ -4,7 +4,7 @@ import Client from '../../Client'
 import MWarnList from '../../Models/WarnList'
 import { ifStaff as IfStaff } from '../../Module/Moderation/StaffList'
 
-export default class Ping extends Command {
+export default class WarnDelete extends Command {
   constructor() {
     super({
       name: 'warndelete',
