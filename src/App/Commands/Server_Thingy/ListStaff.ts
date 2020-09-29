@@ -25,7 +25,7 @@ export default class ListStaff extends Command {
     const embed = new MessageEmbed()
       .setColor(client.config.botColor)
       .setTitle('Daftar Role Staff')
-      .setFooter(`Direquest oleh ${message.author.tag}`)
+      .setFooter(`Diminta oleh ${message.author.tag}`, message.author.displayAvatarURL())
       .setTimestamp()
       .setDescription(returningData.length > 0 ? returningData.join('\n') : 'Tidak ada role.')
 

@@ -27,7 +27,7 @@ export default class WarnList extends Command {
     const embed = new MessageEmbed()
       .setColor(client.config.botColor)
       .setTimestamp()
-      .setFooter(`Diminta oleh ${message.author.tag}`)
+      .setFooter(`Diminta oleh ${message.author.tag}`, message.author.displayAvatarURL())
       .setTitle(`Daftar Warn untuk ${member.user.tag}`)
     let retStr = ''
     let count = 1

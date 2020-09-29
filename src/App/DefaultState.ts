@@ -33,6 +33,12 @@ export default {
   tempMute: new Collection<string, Moment>(),
 
   /**
+   * Anti Invite module di sini.
+   * @description Dalam array berisi role yang "immune" dengan module ini di tiap server.
+   */
+  antiInvite: new Collection<string, string[]>(),
+
+  /**
    * Gesper state here.
    */
   gesper: {

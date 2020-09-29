@@ -15,7 +15,7 @@ export default class PunishmentList extends Command {
     })
   }
 
-  private menu = {
+  private menu: { [key: string]: IMenu } = {
     warn: {
       description: 'Hukuman ini kamu dapatkan dikarenakan melanggar suatu peraturan/mengganggu member lain di server ini.',
       whyGetPunishment: 'Diberikan oleh staff secara langsung atau dari laporan member.',
@@ -36,6 +36,13 @@ export default class PunishmentList extends Command {
         { counter: 7, fallback: '12 jam mute/bungkam' },
         { counter: 9, fallback: '1 hari mute/bungkam' },
         { counter: 10, fallback: '3 hari mute/bungkam dan seterusnya' },
+      ]
+    },
+    invite: {
+      description: 'Hukuman ini kamu dapatkan dikarenakan mengirimkan Discord Invite Link.',
+      whyGetPunishment: 'Anti Discord Link.',
+      counting: [
+        { counter: 1, fallback: '2 jam mute/bungkam dan seterusnya' }
       ]
     }
   }
@@ -59,7 +66,7 @@ export default class PunishmentList extends Command {
     } else {
       const menu = plMenu.toLowerCase()
       if (!categoryMenu.includes(menu)) return message.reply('menu tidak valid.')
-      const list = this.menu[menu] as IMenu
+      const list = this.menu[menu]
 
       embed
         .setTitle(`Deskripsi hukuman untuk ${menu}`)
