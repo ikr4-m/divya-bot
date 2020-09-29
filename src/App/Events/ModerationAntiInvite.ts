@@ -23,7 +23,7 @@ export default class ModerationAntiInvite extends Events {
 
     const content = message.content
     const matcher = content.match(
-      /discord(?:\.com|app\.com|\.gg|\.io|\.me|\.li)[\/invite\/]?(?:[a-zA-Z0-9\-]{2,32})/igm // eslint-disable-line
+      /(https?:\/\/)?(http?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/.+[a-z]/igm // eslint-disable-line
     ).length > 0
     if (matcher) {
       const _role = message.guild.roles.cache.filter(r => r.name === 'Muted')
