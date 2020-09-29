@@ -1,7 +1,7 @@
 import Client from '../Client'
 import Events from '../Events'
 
-export default class Ready extends Events {
+export default class EngineReady extends Events {
   constructor() {
     super('ready')
   }

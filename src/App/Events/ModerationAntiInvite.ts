@@ -3,7 +3,7 @@ import Client from '../Client'
 import Events from '../Events'
 import { setTempMute } from '../Module/Moderation/TempMute'
 
-export default class Debug extends Events {
+export default class ModerationAntiInvite extends Events {
   constructor() {
     super('message')
   }

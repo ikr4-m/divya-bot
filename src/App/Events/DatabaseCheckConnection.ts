@@ -3,7 +3,7 @@ import Client from '../Client'
 import Events from '../Events'
 import { checkConnection } from '../Models/_Connection'
 
-export default class Debug extends Events {
+export default class DatabaseCheckConnection extends Events {
   constructor() {
     super('ready')
   }

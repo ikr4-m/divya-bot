@@ -3,7 +3,7 @@ import Events from '../Events'
 import MTempMute from '../Models/TempMute'
 import Moment from 'moment'
 
-export default class Debug extends Events {
+export default class ModerationCheckMute extends Events {
   constructor() {
     super('ready')
   }
@@ -24,7 +24,9 @@ export default class Debug extends Events {
         if (!role) return
 
         if (now.diff(value, 's') > 0) {
-          await member.roles.remove(role)
+          if (member.roles.cache.has(role.id)) {
+            await member.roles.remove(role)
+          }
           await MTempMute.update({ executed: true }, {
             where: { serverID, memberID, executed: false }
           })

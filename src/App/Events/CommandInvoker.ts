@@ -3,7 +3,7 @@ import Client from '../Client'
 import Events from '../Events'
 import Cooldown from '../Module/Command/Cooldown'
 
-export default class Debug extends Events {
+export default class CommandInvoker extends Events {
   constructor() {
     super('message')
   }

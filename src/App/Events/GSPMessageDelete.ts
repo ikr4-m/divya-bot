@@ -2,7 +2,7 @@ import Client from '../Client'
 import Events from '../Events'
 import { Message, MessageEmbed, TextChannel } from 'discord.js'
 
-export default class Ready extends Events {
+export default class GSPMessageDelete extends Events {
   constructor() {
     super('messageDelete')
   }

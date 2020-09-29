@@ -1,7 +1,7 @@
 import Client from '../Client'
 import Events from '../Events'
 
-export default class Debug extends Events {
+export default class EngineDebug extends Events {
   constructor() {
     super('debug')
   }
