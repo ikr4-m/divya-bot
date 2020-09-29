@@ -20,6 +20,10 @@ export default class GSPMessageDelete extends Events {
       .addField('Content', message.content, false)
       .setTimestamp()
 
-    channel.send(embed)
+    const mentioned = []
+    message.mentions.members.forEach(men => mentioned.push(`<@!${men.id}>`))
+    message.mentions.roles.forEach(men => mentioned.push(`<@&${men.id}>`))
+
+    channel.send(mentioned.length > 0 ? `Mentioned: ${mentioned.join(' | ')}` : '', { embed })
   }
 }
