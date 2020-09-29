@@ -11,8 +11,6 @@ export default class DatabaseToState extends Events {
   }
 
   public async run(client: Client): Promise<any> {
-    console.log('Gateway opened!')
-
     /**
      * Panggil daftar antiinvite
      */

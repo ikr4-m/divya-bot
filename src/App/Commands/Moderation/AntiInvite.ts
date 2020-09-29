@@ -13,7 +13,7 @@ export default class AntiInvite extends Command {
         { name: 'toggle|immune', require: false, type: 'BLOCK' },
         { name: 'immune=roleID|roleMention', require: false, type: 'BLOCK' }
       ],
-      example: 'managestaff toggle'
+      example: 'antiinvite toggle'
     })
   }
 

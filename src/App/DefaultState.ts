@@ -39,6 +39,14 @@ export default {
   antiInvite: new Collection<string, string[]>(),
 
   /**
+   * Badword module di sini
+   */
+  badword: new Collection<string, {
+    immune: string[],
+    list: string[]
+  }>(),
+
+  /**
    * Gesper state here.
    */
   gesper: {
