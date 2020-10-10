@@ -1,6 +1,7 @@
 import { Collection } from 'discord.js'
 import { Moment } from 'moment'
 import moment from 'moment'
+import BadwordClass from './Module/Moderation/Badword'
 
 /**
  * You can use this state to store your global variable to your bot
@@ -43,7 +44,7 @@ export default {
    */
   badword: new Collection<string, {
     immune: string[],
-    list: string[]
+    list: BadwordClass
   }>(),
 
   /**

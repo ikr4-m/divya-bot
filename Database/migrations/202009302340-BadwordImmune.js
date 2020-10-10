@@ -6,7 +6,7 @@ module.exports = {
    * @param {QueryInterface} query
    */
   up: async (query) => {
-    await query.createTable('tbl_badword_list', {
+    await query.createTable('tbl_badword_immune', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -16,11 +16,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      memberID: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      badword: {
+      roleID: {
         type: Sequelize.STRING,
         allowNull: false
       }
@@ -30,6 +26,6 @@ module.exports = {
    * @param {QueryInterface} query
    */
   down: async (query) => {
-    await query.dropTable('tbl_badword_list')
+    await query.dropTable('tbl_badword_immune')
   }
 }

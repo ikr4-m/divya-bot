@@ -1,9 +1,15 @@
 import Client from '../Client'
 import Events from '../Events'
+import Sequelize from 'sequelize'
 
 // Anti Invite Module
 import AntiInviteServer from '../Models/AntiInviteServer'
 import AntiInviteImmune from '../Models/AntiInviteImmune'
+
+// Badword List
+import BadwordList from '../Models/BadwordList'
+import BadwordImmune from '../Models/BadwordImmune'
+import BadwordClass from '../Module/Moderation/Badword'
 
 export default class DatabaseToState extends Events {
   constructor() {
@@ -28,5 +34,25 @@ export default class DatabaseToState extends Events {
           })
         })
       })
+
+    /**
+     * Panggil list badword
+     */
+    const _bwListServer = await BadwordList.findAll({
+      attributes: [
+        [Sequelize.fn('DISTINCT', Sequelize.col('serverID')), 'serverID']
+      ]
+    })
+    const bwListServer = _bwListServer.map(val => val.serverID)
+    bwListServer.forEach(async serverID => {
+      client.state.badword.set(serverID, {
+        immune: (await BadwordImmune.findAll({
+          where: { serverID }
+        })).map(val => val.roleID),
+        list: new BadwordClass((await BadwordList.findAll({
+          where: { serverID }
+        })).map(val => val.badword))
+      })
+    })
   }
 }

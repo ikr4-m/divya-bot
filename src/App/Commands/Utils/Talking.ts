@@ -26,7 +26,7 @@ export default class Talking extends Command {
     }
 
     returnable.serverID = args.server || message.guild.id
-    returnable.channelID = args.channel || message.channel.id
+    returnable.channelID = message.mentions.channels.first() || args.channel || message.channel.id
 
     const server = client.guilds.cache.get(returnable.serverID)
     if (!server) return message.reply('server tidak ditemukan!')

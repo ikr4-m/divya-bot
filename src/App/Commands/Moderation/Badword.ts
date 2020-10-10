@@ -1,6 +1,8 @@
 import { Message, MessageEmbed } from 'discord.js'
 import Command from '../../Command'
 import Client from '../../Client'
+import BadwordClass from '../../Module/Moderation/Badword'
+import MBadwordList from '../../Models/BadwordList'
 
 export default class Badword extends Command {
   constructor() {
@@ -37,15 +39,15 @@ export default class Badword extends Command {
         embed.setDescription('Masih kosong.')
       } else {
         embed.setDescription(
-          list.list.length > 0
-            ? `\`${list.list.join('`, `')}\``
+          list.list.badword.length > 0
+            ? `\`${list.list.badword.join('`, `')}\``
             : 'Masih kosong.'
         )
       }
     } else {
       const _server = client.state.badword.get(message.guild.id)
       if (!_server) client.state.badword.set(message.guild.id, {
-        immune: [], list: []
+        immune: [], list: new BadwordClass([])
       })
       const server = client.state.badword.get(message.guild.id)
       
@@ -56,18 +58,50 @@ export default class Badword extends Command {
         const badword = _badword.toLowerCase()
 
         embed.setTitle('Modifikasi Badword')
-        if (!server.list.includes(badword)) {
-          server.list.push(badword)
+        if (!server.list.hasBadword(badword)) {
+          server.list.addBadowrd(badword)
           embed.setDescription(`Badword "${badword}" berhasil ditambahkan!`)
+          await MBadwordList.create({
+            serverID: message.guild.id,
+            badword: badword,
+            memberID: message.author.id
+          })
         } else {
-          server.list.splice(server.list.indexOf(badword), 1)
+          server.list.removeBadword(badword)
           embed.setDescription(`Badword "${badword}" berhasil dihapus!`)
+          await MBadwordList.destroy({
+            where: {
+              serverID: message.guild.id,
+              badword: badword
+            }
+          })
         }
       }
       // Immune
       if (toggle === 'immune') {
-        // const role = message.mentions.roles.first() || message.guild.roles.cache.get(args[1])
-        // code
+        const role = message.mentions.roles.first() || message.guild.roles.cache.get(args[1])
+        if (!role) {
+          embed
+            .setTitle('Daftar Role Immune')
+            .setDescription(
+              server.immune.length > 0
+                ? server.immune.map(val => {
+                  const rl = message.guild.roles.cache.get(val)
+                  return !rl ? 'Invalid role' : rl.name
+                }).join(', ')
+                : 'Masih kosong.'
+            )
+        } else {
+          embed.setTitle('Toggle Role Immune')
+          const immuneToggle = server.immune.includes(role.id)
+          if (!immuneToggle) {
+            server.immune.push(role.id)
+            embed.setDescription(`Role untuk <@&${role.id}> berhasil ditambahkan ke dalam immune.`)
+          } else {
+            server.immune.splice(server.immune.indexOf(role.id), 1)
+            embed.setDescription(`Role untuk <@&${role.id}> berhasil dihapus ke dalam immune.`)
+          }
+        }
       }
       // Tidak ada yang sama
       if (!['modify', 'immune'].includes(toggle)) {

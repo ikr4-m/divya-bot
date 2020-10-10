@@ -9,7 +9,7 @@ export default class ModerationAntiInvite extends Events {
   }
 
   public async run(client: Client, message: Message): Promise<any> {
-    const executor = message.guild.members.cache.get(message.author.id)
+    const executor = await message.guild.members.fetch(message.author.id)
     if (!executor) return
     const server = client.state.antiInvite.get(message.guild.id)
     if (!server) return
