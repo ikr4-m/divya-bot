@@ -1,6 +1,7 @@
 import { Message, MessageEmbed } from 'discord.js'
 import Command from '../../Command'
 import Client from '../../Client'
+import { GetStaffList } from '../../Module/Moderation/StaffList'
 import BadwordClass from '../../Module/Moderation/Badword'
 import MBadwordList from '../../Models/BadwordList'
 
@@ -81,15 +82,21 @@ export default class Badword extends Command {
       if (toggle === 'immune') {
         const role = message.mentions.roles.first() || message.guild.roles.cache.get(args[1])
         if (!role) {
+          const ghostMap = server.immune.map(val => {
+            const rl = message.guild.roles.cache.get(val)
+            return !rl ? 'Invalid role' : rl.name
+          })
+
+          // Inherit dari staff
+          const stfList = await GetStaffList(message.guild.id)
+          stfList.forEach(val => {
+            const rl = message.guild.roles.cache.get(val)
+            ghostMap.push(`${!rl ? 'Invalid role' : rl.name} (from Staff)`)
+          })
           embed
             .setTitle('Daftar Role Immune')
             .setDescription(
-              server.immune.length > 0
-                ? server.immune.map(val => {
-                  const rl = message.guild.roles.cache.get(val)
-                  return !rl ? 'Invalid role' : rl.name
-                }).join(', ')
-                : 'Masih kosong.'
+              ghostMap.length > 0 ? ghostMap.join(', ') : 'Masih kosong'
             )
         } else {
           embed.setTitle('Toggle Role Immune')

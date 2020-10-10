@@ -3,6 +3,7 @@ import Command from '../../Command'
 import Client from '../../Client'
 import AntiInviteServer from '../../Models/AntiInviteServer'
 import AntiInviteImmune from '../../Models/AntiInviteImmune'
+import { GetStaffList } from '../../Module/Moderation/StaffList'
 
 export default class AntiInvite extends Command {
   constructor() {
@@ -28,7 +29,7 @@ export default class AntiInvite extends Command {
       .setColor(client.config.botColor)
       .setFooter(`Diminta oleh ${message.author.tag}`, message.author.displayAvatarURL())
       .setTimestamp()
-    
+
     const toggle = args[0] as 'toggle' | 'immune'
     const getState = client.state.antiInvite.has(message.guild.id)
     if (!toggle) {
@@ -62,15 +63,21 @@ export default class AntiInvite extends Command {
         const role = message.mentions.roles.first() || message.guild.roles.cache.get(args[1])
 
         if (!role) {
+          const ghostMap = server.map(val => {
+            const rl = message.guild.roles.cache.get(val)
+            return !rl ? 'Invalid role' : rl.name
+          })
+
+          // Inherit dari staff
+          const stfList = await GetStaffList(message.guild.id)
+          stfList.forEach(val => {
+            const rl = message.guild.roles.cache.get(val)
+            ghostMap.push(`${!rl ? 'Invalid role' : rl.name} (from Staff)`)
+          })
           embed
             .setTitle('Daftar Role Immune')
             .setDescription(
-              server.length > 0
-                ? server.map(val => {
-                  const rl = message.guild.roles.cache.get(val)
-                  return !rl ? 'Invalid role' : rl.name
-                }).join(', ')
-                : 'Masih kosong.'
+              ghostMap.length > 0 ? ghostMap.join(', ') : 'Masih kosong'
             )
         } else {
           embed.setTitle('Toggle Role Immune')

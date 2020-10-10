@@ -2,6 +2,7 @@ import { Message } from 'discord.js'
 import Client from '../Client'
 import Events from '../Events'
 import { setTempMute } from '../Module/Moderation/TempMute'
+import { ifStaff } from '../Module/Moderation/StaffList'
 
 export default class ModerationAntiInvite extends Events {
   constructor() {
@@ -20,6 +21,9 @@ export default class ModerationAntiInvite extends Events {
     })
     if (ifImmune) return
     if (executor.permissions.has('ADMINISTRATOR')) return
+
+    // Staff Bypass
+    if (await ifStaff(executor)) return
 
     const content = message.content
     const matcher = content.match(

@@ -3,7 +3,8 @@ import Client from '../Client'
 import Events from '../Events'
 import Moment from 'moment'
 import MBadwordVictim from '../Models/BadwordVictim'
-// import { setTempMute } from '../Module/Moderation/TempMute'
+import { ifStaff } from '../Module/Moderation/StaffList'
+import { setTempMute } from '../Module/Moderation/TempMute'
 
 export default class ModerationBadword extends Events {
   constructor() {
@@ -25,6 +26,9 @@ export default class ModerationBadword extends Events {
     if (ifImmune) return
     if (executor.permissions.has('ADMINISTRATOR')) return
 
+    // Staff Bypass
+    if (await ifStaff(executor)) return
+
     const matcher = server.list.getBadword(message.content)
     if (matcher.length > 0) {
       await message.delete()
@@ -44,6 +48,67 @@ export default class ModerationBadword extends Events {
         }
       })
       const counter = _counter.length
+
+      // Counting mute
+      const role = message.guild.roles.cache.filter(r => r.name === 'Muted').first()
+      if (!role) return
+      switch (counter) {
+        case 3:
+          setTempMute(client, executor, role, '1h', 'Badword')
+            .then(res => {
+              if (res) message.reply(
+                `<@!${executor.id}> berhasil dibungkam selama ${res.intTime} ${res.prettyTime} dengan alasan:\`\`\`[AutoWarn] Badword\`\`\``
+              )
+            })
+            .catch(err => {
+              message.reply(client.constant.errReason(err))
+            })
+          break
+        case 5:
+          setTempMute(client, executor, role, '5h', 'Badword')
+            .then(res => {
+              if (res) message.reply(
+                `<@!${executor.id}> berhasil dibungkam selama ${res.intTime} ${res.prettyTime} dengan alasan:\`\`\`[AutoWarn] Badword\`\`\``
+              )
+            })
+            .catch(err => {
+              message.reply(client.constant.errReason(err))
+            })
+          break
+        case 7:
+          setTempMute(client, executor, role, '12h', 'Badword')
+            .then(res => {
+              if (res) message.reply(
+                `<@!${executor.id}> berhasil dibungkam selama ${res.intTime} ${res.prettyTime} dengan alasan:\`\`\`[AutoWarn] Badword\`\`\``
+              )
+            })
+            .catch(err => {
+              message.reply(client.constant.errReason(err))
+            })
+          break
+        case 9:
+          setTempMute(client, executor, role, '1d', 'Badword')
+            .then(res => {
+              if (res) message.reply(
+                `<@!${executor.id}> berhasil dibungkam selama ${res.intTime} ${res.prettyTime} dengan alasan:\`\`\`[AutoWarn] Badword\`\`\``
+              )
+            })
+            .catch(err => {
+              message.reply(client.constant.errReason(err))
+            })
+          break
+        case 10:
+          setTempMute(client, executor, role, '3d', 'Badword')
+            .then(res => {
+              if (res) message.reply(
+                `<@!${executor.id}> berhasil dibungkam selama ${res.intTime} ${res.prettyTime} dengan alasan:\`\`\`[AutoWarn] Badword\`\`\``
+              )
+            })
+            .catch(err => {
+              message.reply(client.constant.errReason(err))
+            })
+          break
+      }
 
       await message.reply(
         `kamu diwarn dengan alasan:\n\`\`\`[AutoWarn] Badword ke-${counter}. Tanyakan pada temanmu/staff tentang kesalahanmu di gs!warnlist @mention\`\`\``
