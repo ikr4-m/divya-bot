@@ -13,6 +13,7 @@ export default class GSPMessageDelete extends Events {
     const channel = guild.channels.cache.get('714821103360409631') as TextChannel
     if (!channel) return
     if (channel.type !== 'text') return
+    if (message.author.bot) return
 
     const embed = new MessageEmbed()
       .setAuthor(`${message.author.tag} [${message.author.id}]`, message.author.displayAvatarURL())
