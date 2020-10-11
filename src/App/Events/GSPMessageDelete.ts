@@ -19,7 +19,7 @@ export default class GSPMessageDelete extends Events {
     const embed = new MessageEmbed()
       .setAuthor(`${message.author.tag} [${message.author.id}]`, message.author.displayAvatarURL())
       .addField('Channel', `<#${message.channel.id}>`, false)
-      .addField('Content', message.content, false)
+      .addField('Content', message.content.length > 0 ? message.content : 'Tidak ada konten', false)
       .setTimestamp()
 
     const mentioned = []
