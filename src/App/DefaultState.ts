@@ -48,6 +48,11 @@ export default {
   }>(),
 
   /**
+   * Register role di sini
+   */
+  register: new Collection<string, string>(),
+
+  /**
    * Gesper state here.
    */
   gesper: {

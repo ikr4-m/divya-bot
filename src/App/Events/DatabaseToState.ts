@@ -11,6 +11,9 @@ import BadwordList from '../Models/BadwordList'
 import BadwordImmune from '../Models/BadwordImmune'
 import BadwordClass from '../Module/Moderation/Badword'
 
+// Register
+import RegisterRole from '../Models/RegisterRole'
+
 export default class DatabaseToState extends Events {
   constructor() {
     super('ready')
@@ -54,5 +57,18 @@ export default class DatabaseToState extends Events {
         })).map(val => val.badword))
       })
     })
+
+    /**
+     * Panggil list register
+     */
+    RegisterRole.findAll({
+      attributes: [
+        [Sequelize.fn('DISTINCT', Sequelize.col('serverID')), 'serverID'],
+        'roleID'
+      ]
+    })
+      .then(regist => {
+        regist.forEach(reg => client.state.register.set(reg.serverID, reg.roleID))
+      })
   }
 }
