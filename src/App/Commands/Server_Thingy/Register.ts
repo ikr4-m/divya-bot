@@ -67,33 +67,35 @@ export default class Register extends Command {
       if (!_role) return
       const role = message.guild.roles.cache.get(_role)
       if (!role) return
-      message.author.createDM()
-        .then(async dmchannel => {
-          await message.reply('cek DM kamu sekarang!')
 
-          dmchannel.send(
-            'Kamu memiliki waktu 1 menit untuk menyelesaikan tantangan ini.\nSilahkan ketik kode di bawah ini untuk menyelesaikannya!', {
-              files: [{
-                attachment: captcha.generateSync()
-              }]
-            }
-          )
-          dmchannel.awaitMessages(
-            (respone: Message) => respone.author.id === message.author.id,
-            { max: 1, time: 60000, errors: ['time'] }
-          )
-            .then(collection => {
-              const code = collection.first().content
-              const trigger = code.toLowerCase() === captchaString
-              dmchannel.send(`Kode keamanan ${trigger ? 'benar. Selamat datang!' : 'salah. Silahkan ulangi kembali.'}`)
-              if (trigger) {
-                const member = message.guild.members.cache.get(message.author.id)
-                if (!member) return
-                member.roles.add(role)
-              }
-            })
-            .catch(_err => {
-              message.channel.send('Waktu habis! Silahkan request kembali.')
+      await message.reply('cek DM kamu sekarang!')
+      await message.author.send(
+        'Kamu memiliki waktu 1 menit untuk menyelesaikan tantangan ini.\nSilahkan ketik kode di bawah ini untuk menyelesaikannya!', {
+          files: [{
+            attachment: captcha.generateSync()
+          }]
+        }
+      )
+        .then(_msg => {
+          message.author.createDM()
+            .then(dmchannel => {
+              dmchannel.awaitMessages(
+                (respone: Message) => respone.author.id === message.author.id,
+                { max: 1, time: 60000, errors: ['time'] }
+              )
+                .then(collection => {
+                  const code = collection.first().content
+                  const trigger = code.toLowerCase() === captchaString
+                  dmchannel.send(`Kode keamanan ${trigger ? 'benar. Selamat datang!' : 'salah. Silahkan ulangi kembali.'}`)
+                  if (trigger) {
+                    const member = message.guild.members.cache.get(message.author.id)
+                    if (!member) return
+                    member.roles.add(role)
+                  }
+                })
+                .catch(_err => {
+                  message.channel.send('Waktu habis! Silahkan request kembali.')
+                })
             })
         })
         .catch(_err => {
