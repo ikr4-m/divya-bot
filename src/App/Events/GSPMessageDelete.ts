@@ -8,6 +8,7 @@ export default class GSPMessageDelete extends Events {
   }
 
   public async run(client: Client, message: Message): Promise<any> {
+    if (message.channel.type !== 'text') return
     const guild = client.guilds.cache.get('302655971946135554')
     if (!guild) return
     const channel = guild.channels.cache.get('714821103360409631') as TextChannel

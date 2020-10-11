@@ -12,8 +12,9 @@ export default class ModerationBadword extends Events {
   }
 
   public async run(client: Client, message: Message): Promise<any> {
+    if (message.channel.type !== 'text') return
     if (message.author.id === client.user.id) return
-    // if (client.config.owner.includes(message.author.id)) return
+    if (client.config.owner.includes(message.author.id)) return
     const executor = await message.guild.members.fetch(message.author.id)
     if (!executor) return
     const server = client.state.badword.get(message.guild.id)
