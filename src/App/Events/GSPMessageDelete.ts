@@ -10,6 +10,7 @@ export default class GSPMessageDelete extends Events {
   public async run(client: Client, message: Message): Promise<any> {
     if (message.channel.type !== 'text') return
     if (message.author.bot) return
+    if (message.guild.id !== '302655971946135554') return
 
     const guild = client.guilds.cache.get('302655971946135554')
     if (!guild) return

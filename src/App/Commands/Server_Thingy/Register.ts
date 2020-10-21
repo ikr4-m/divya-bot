@@ -67,6 +67,11 @@ export default class Register extends Command {
       if (!_role) return
       const role = message.guild.roles.cache.get(_role)
       if (!role) return
+      const member = message.guild.members.cache.get(message.author.id)
+      if (!member) return
+      if (member.roles.cache.filter(r => r.id === role.id).size > 0) return message.reply(
+        'anda sudah terregistrasi!'
+      )
 
       await message.reply('cek DM kamu sekarang!')
       await message.author.send(
