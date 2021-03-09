@@ -53,4 +53,4 @@ $ npm run test
 # Ada Pertanyaan?
 Silahkan mampir ke #tech-corner, tanyakan pada user yang bernama Stellarz_Munn#4554 atau [ Ryuu ]#9611 untuk masalah bot ini.
 
-*(C) 2019 - Gamer Source Pub, All rights reserved.*
+*(C) 2021 - PGB Creative, All rights reserved.*
