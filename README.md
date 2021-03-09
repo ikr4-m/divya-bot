@@ -1,5 +1,5 @@
-# Felice, Mommy GSP!
-Bukan robot, tapi mommy kita yang bisa ngelakuin "semuanya" dan "semaunya"!
+# Divya, the Awkward Girl!
+Wanita imut yang sangat aneh, bahkan dibilang terlalu aneh untuk masuk di nalar umum.
 
 # Alat Perang
 1. NodeJS v12 ke atas
