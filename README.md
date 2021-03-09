@@ -2,7 +2,7 @@
 Wanita imut yang sangat aneh, bahkan dibilang terlalu aneh untuk masuk di nalar umum.
 
 # Alat Perang
-1. NodeJS v12 ke atas
+1. NodeJS v13 ke atas
 2. Python v3.7 (set Pathnya ke npm config apabila perintah command di cmd kamu bukan python3 atau python)
 3. Apabila kamu pengguna Windows, kamu perlu menginstall [windows-build-tools](https://github.com/felixrieseberg/windows-build-tools) atau compiler C++ dari Visual Studio. Sedangkan apabila kamu pengguna Linux, kamu perlu menginstall CMake/Ninja dan GCC Compiler.
 4. [node-gyp](https://github.com/nodejs/node-gyp#installation) telah terinstall dalam NPM kamu secara global.

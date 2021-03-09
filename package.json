@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "description": "Just a bot.",
   "engines": {
-    "node": ">= 12.13 <13"
+    "node": ">= 13"
   },
   "main": "./build/src/index.js",
   "bin": "./build/src/index.js",
@@ -15,7 +15,7 @@
     "@types/umzug": "^2.2.3",
     "@typescript-eslint/eslint-plugin": "~3.2.0",
     "@typescript-eslint/parser": "~3.2.0",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "canvas": "^2.6.1",
     "captcha-canvas": "^2.2.1",
     "console-stamp": "^0.2.9",
