@@ -4,7 +4,7 @@ import { DataTypes, Model, Optional } from 'sequelize'
 /**
  * Model list
  */
-interface IEventComGSP {
+interface IEventOrganizer {
   id: number
   serverID: string
   roleID: string
@@ -14,11 +14,11 @@ interface IEventComGSP {
  */
 type IOptionalProperty = 'id'
 
-interface OptionalProperty extends Optional<IEventComGSP, IOptionalProperty> {}
-interface UEventComGSP extends Model<IEventComGSP, OptionalProperty>, IEventComGSP {}
+interface OptionalProperty extends Optional<IEventOrganizer, IOptionalProperty> {}
+interface UEventOrganizer extends Model<IEventOrganizer, OptionalProperty>, IEventOrganizer {}
 
-export default Sequelize.define<UEventComGSP>(
-  'tbl_event_commitee',
+export default Sequelize.define<UEventOrganizer>(
+  'tbl_event_organizer',
   {
     id: {
       type: DataTypes.INTEGER,

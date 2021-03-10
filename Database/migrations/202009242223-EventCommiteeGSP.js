@@ -6,7 +6,7 @@ module.exports = {
    * @param {QueryInterface} query
    */
   up: async (query) => {
-    await query.createTable('tbl_event_commitee', {
+    await query.createTable('tbl_event_organizer', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -26,6 +26,6 @@ module.exports = {
    * @param {QueryInterface} query
    */
   down: async (query) => {
-    await query.dropTable('tbl_event_commitee')
+    await query.dropTable('tbl_event_organizer')
   }
 }

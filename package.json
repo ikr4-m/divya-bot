@@ -19,7 +19,7 @@
     "canvas": "^2.6.1",
     "captcha-canvas": "^2.2.1",
     "console-stamp": "^0.2.9",
-    "discord.js": "^12.2.0",
+    "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "eslint": "~7.2.0",
     "eslint-config-prettier": "~6.11.0",
@@ -44,7 +44,7 @@
     "lint": "eslint . --ext .ts,.tsx",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
-    "start": "node ./build/src/index.js",
+    "start": "node ./build/src/Index.js",
     "migrate:up": "node ./Database/migrations.js up",
     "migrate:down": "node ./Database/migrations.js down"
   },

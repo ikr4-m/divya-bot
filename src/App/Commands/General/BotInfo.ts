@@ -13,7 +13,7 @@ export default class BotInfo extends Command {
   }
 
   public async run(client: Client, message: Message, _args: string[]): Promise<any> {
-    const pkgs = await Axios.get('https://raw.githubusercontent.com/skymunn/gsp-bot/master/package.json')
+    const pkgs = await Axios.get('https://raw.githubusercontent.com/skymunn/divya-bot/master/package.json')
     if (!pkgs) return message.reply('tanyakan kepada staff tentang error ini:\n```Link Package hilang.```')
     const data = pkgs.data
     const uptime = Moment().diff(client.state.uptime)
@@ -21,7 +21,7 @@ export default class BotInfo extends Command {
     const embed = new MessageEmbed()
       .setColor(client.config.botColor)
       .setTimestamp()
-      .setFooter('https://github.com/skymunn/gsp-bot', client.user.displayAvatarURL())
+      .setFooter('https://github.com/skymunn/divya-bot', client.user.displayAvatarURL())
       .setThumbnail(client.user.displayAvatarURL())
       .setTitle(`Statistik ${client.config.botName}`)
 
