@@ -20,10 +20,10 @@ export default {
     status: true,
     interval: 5000,
     message: [
-      "Daddy! -w-",
-      "Not a bot, but a robot.",
-      "Watching you all",
-      "Love you all!! (●♡∀♡)"
+      '24h nongki',
+      'Liatin korang',
+      'Menglucu',
+      'Menggokil'
     ]
   },
 
